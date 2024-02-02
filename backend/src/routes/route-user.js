@@ -10,6 +10,6 @@ function getUsers(req, res) {
         res.send(result);
     })
 }
-router.get('/', getUsers)
+router.get('/', getUsers);
 
 module.exports = router;
