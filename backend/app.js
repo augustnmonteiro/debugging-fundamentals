@@ -1,14 +1,26 @@
+//express
 const express = require('express');
 const app = express();
 app.use(express.json());
+
+//doteEnv
 require('dotenv').config();
 const port = process.env.PORT;
 
-const connection = require('./src/database/database');
-const users = require('./src/routes/route-user');
-const rank = require('./src/routes/route-rank');
-const getRecordOfPlayer = require('./src/routes/route-player-record')
+//userAgent
+const useragent = require('express-useragent');
+app.use(useragent.express());
+
+//requestIpClient
+const requestIp = require('request-ip');
+app.use(requestIp.mw());
+
+//Import archives
+const connection = require('./src/database/database.js');
+const users = require('./src/routes/route-user.js');
+
 app.use((req, res, next) => {
+    console.log(req.headers);
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
@@ -21,5 +33,5 @@ app.use('/users/game/', rank)
 app.use('/game/', getRecordOfPlayer)
 
 app.listen(port, () => {
-    console.log('Server running.');
-});
+    console.log('Server runing.');
+})
