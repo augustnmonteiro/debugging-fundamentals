@@ -1,6 +1,6 @@
 const handleDatabaseError = (res, error) => {
-    console.error('Erro no banco de dados:', error);
-    res.status(500).send('Erro interno do servidor');
+    console.error('Database error:', error);
+    res.status(500).send('Internal Server Error.');
 };
 
 const getAllUsersFromDatabase = (connection, res) => {
@@ -34,14 +34,152 @@ const insertUserIntoDatabase = (connection, user, res) => {
                 handleDatabaseError(res, error);
                 reject(error);
             } else {
-                console.log('Registro inserido com sucesso:', results);
+                console.log('Registration entered successfully:', results);
                 resolve();
             }
         });
     });
 };
 
+const updateUser = (connection, user, res) => {
+    return new Promise((resolve, reject) => {
+        const { id, username, browser, operationalSystem, ipAddress } = user;
+        
+        const queryVerifyExistsUserid = `
+            SELECT * FROM \`math-game\`.players WHERE id = ?
+        `;
+        
+        connection.query(queryVerifyExistsUserid, [id], (error, results) => {
+            if (error) {
+                handleDatabaseError(res, error);
+                reject(error);
+            } else {
+                if (results.length === 0) {
+                    reject(new Error(`User Not Found.`));
+                    return;
+                }
+
+                const querySqlUpdate = `
+                    UPDATE \`math-game\`.players 
+                    SET username = ?,
+                    updated_at = NOW(), browser = ?,
+                    operational_system = ?,
+                    ip_address = ? WHERE id = ?
+                `;
+
+                connection.query(querySqlUpdate, [username, browser, operationalSystem, ipAddress, id], (error, results) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(results);
+                    }
+                });
+            }
+        });
+    });
+};
+
+
+const  getRanking = (connection, rankType, limit, res) => {
+    return new Promise((resolve, reject) => {
+        let timeFrameCondition;
+        let dateFormat;
+
+        switch (rankType) {
+            case "DAILY":
+                timeFrameCondition = "DATE(date) = CURRENT_DATE()";
+                dateFormat = "%Y-%m-%d";
+                break;
+            case "WEEKLY":
+                timeFrameCondition = `YEARWEEK(date, 1) = YEARWEEK(CURRENT_DATE(), 1)`;
+                dateFormat = "%Y-%u";
+                break;
+            case "MONTLHY":
+                timeFrameCondition = `DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')`;
+                dateFormat = "%Y-%m";
+                break;
+            default:
+                res.status(400).json({ msg: "Invalid rank type." });
+                return;
+        }
+
+        const queryRank = `
+            SELECT username, level, round, 
+            MAX(score) AS score, 
+            RANK() OVER (ORDER BY MAX(score) DESC) AS position
+            FROM \`math-game\`.players
+            WHERE ${timeFrameCondition}
+            GROUP BY username, level, round, DATE_FORMAT(date, ?)
+            ORDER BY score DESC LIMIT ?
+        `;
+
+        connection.query(queryRank, [dateFormat, limit], (error, results) => {
+            if (error) {
+                handleDatabaseError(res, error)
+                reject(error);
+            } else {
+                if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve([]);
+                }
+            }
+        });
+    });
+}
+
+const getRecordOfPlayer = (connection, username, period, res) => {
+    return new Promise((resolve, reject) => {
+        if(username && period) {
+            let timeFrameCondition;
+            
+            switch (period) {
+                case "DAILY":
+                    timeFrameCondition = "DATE(date) = CURRENT_DATE()";
+                    break;
+                case "WEEKLY":
+                    timeFrameCondition = "YEARWEEK(date, 1) = YEARWEEK(CURRENT_DATE(), 1)";
+                    break;
+                case "MONTHLY":
+                    timeFrameCondition = "DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
+                    break;
+                default:
+                    res.status(400).json({ msg: "Invalid period." });
+                    return;
+            }
+
+            const querySqlRecord = `
+                SELECT 
+                MAX(score) AS max_score,
+                MAX(level) AS max_level,
+                MAX(round) AS max_round,
+                SUM(score) AS total_score,
+                SUM(round) AS total_rounds_played
+                FROM \`math-game\`.players WHERE username = ? AND ${timeFrameCondition};
+            `;
+              
+            connection.query(querySqlRecord, [username], (error, results) => {
+                if(error) {
+                    handleDatabaseError(res, error)
+                    reject(error)
+                } else {
+                    if(results.length > 0) {
+                        resolve(results)
+                    } else {
+                        resolve([])
+                    }
+                }
+            })
+        } else {
+            reject("Username or period is invalid.")
+        }
+    })
+}
+
 module.exports = {
     getAllUsersFromDatabase,
-    insertUserIntoDatabase
+    insertUserIntoDatabase,
+    getRanking,
+    getRecordOfPlayer, 
+    updateUser
 };

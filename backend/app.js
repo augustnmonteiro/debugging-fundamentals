@@ -18,6 +18,8 @@ app.use(requestIp.mw());
 //Import archives
 const connection = require('./src/database/database.js');
 const users = require('./src/routes/route-user.js');
+const getRankig = require('./src/routes/route-rank.js');
+const getRecordOfPlayer = require('./src/routes/route-player-record.js')
 
 app.use((req, res, next) => {
     console.log(req.headers);
@@ -29,6 +31,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/users', users);
+app.use('/users/game/', getRankig)
+app.use('/game/', getRecordOfPlayer)
 
 app.listen(port, () => {
     console.log('Server runing.');
