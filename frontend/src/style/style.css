@@ -1,0 +1,280 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: var(--color5);
+    font-family: 'Protest Strike', sans-serif;
+}
+
+:root {
+    --color1: #383939;
+    --color2: #149c68;
+    --color3: #38c958;
+    --color4: #aee637;
+    --color5: #fffedb;
+    --color6: #ffffff;
+}
+
+#containerIndex {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../../src/img/bck1.png') center/cover no-repeat;
+}
+
+#contentElements {
+    width: 200px;
+    height: 50px;
+    margin-left: 1320px;
+    margin-top: 35px;
+    position: fixed;
+    z-index: 10;
+}
+
+#greeting {
+    font-size: 25;
+    color: var(--color6);
+}
+
+#inputName {
+    width: 220px;
+    height: 30px;
+    padding: 1px 5px;
+    background-color: rgb(78, 77, 77);
+    border: 2px solid rgb(78, 77, 77);
+    border-color: none;
+    color: var(--color6);
+}
+
+#btnStart {
+    width: 100px;
+    height: 100px;
+    padding: 10px 20px;
+    background-color:  rgb(75, 76, 76);
+    color: var(--color6);
+    border: none;
+    border-style: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#btnRanking {
+    width: 70px;
+    height: 30px;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    color: var(--color1);
+    background-color: rgba(60, 40, 40, 0);
+}
+
+#btnProfile {
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    color: var(--color1 );
+    background-color: rgba(60, 40, 40, 0);
+}
+
+#btnConfig {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+}
+
+#divModalRanking.open {
+    display: flex;
+}
+
+#modalRanking {
+    width: 25%;
+    min-width: 300px;
+    min-height: 330px;
+    background-color: #2b2b2b;
+    backdrop-filter: blur(30px);
+    padding: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#divModalProfile.open {
+    display: flex;
+}
+
+#modalProfile {
+    width: 25%;
+    min-width: 300px;
+    min-height: 330px;
+    background-color: #2b2b2b;
+    backdrop-filter: blur(30px);
+    padding: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#divModalConfig.open {
+    display: flex;
+}
+
+#modalConfig {
+    width: 25%;
+    min-width: 300px;
+    min-height: 330px;
+    background-color: #2b2b2b;
+    backdrop-filter: blur(30px);
+    padding: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#close {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    color: var(--color6);
+    cursor: pointer;
+}
+
+.title {
+    color: var(--color6);
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+#displayQuestions {
+    color: var(--color6);
+    margin-bottom: 15px;
+    font-size: 50px;
+
+}
+
+#containerStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 500px;
+    background-color: var(--color1);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+}
+
+#divModalAlerts {
+    align-items: flex-start;
+}
+
+#divModalAlerts.open {
+    display: flex;
+}
+
+#modalAlerts {
+    width: 30%;
+    min-width: 300px;
+    min-height: 110px;
+    background-color: var(--color1);
+    /* backdrop-filter: blur(30px); */
+    padding: 0px 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+#divModalResults.open {
+    display: flex;
+}
+
+#modalResults {
+    width: 25%;
+    min-width: 300px;
+    min-height: 330px;
+    background-color: var(--color1);
+    backdrop-filter: blur(30px);
+    padding: 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.alerts {
+    font-size: 20px;
+    color: var(--color6);
+}
+
+.configModalGlobal {
+    background: url('../../src/img/bck1.png') center/cover no-repeat;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #37373776;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+#alterNameUser {
+    color: var(--color6);
+}
+
+#inputNameConfig {
+    width: 220px;
+    height: 30px;
+    padding: 1px 5px;
+    background-color: rgb(78, 77, 77);
+    border: 2px solid rgb(78, 77, 77);
+    border-color: none;
+    color: #fff;
+}
+
+#btnChangeUser {
+    width: 235px;
+    height: 30px;
+    padding: 2px 0px;
+    background-color:  rgb(75, 76, 76);
+    color: #fff;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.heart {
+    color: red;
+    cursor: pointer;
+}
+
+.empty-heart {
+    color: white;
+}
