@@ -1,0 +1,57 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#containerMainQuestions {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../../src/img/bck1.png') center/cover no-repeat;
+}
+
+#containerQuestions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    background-color: #333;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+}
+
+#displayQuestions {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+#inputAnswers {
+    width: 220px;
+    height: 30px;
+    padding: 1px 5px;
+    background-color: rgb(78, 77, 77);
+    border: 2px solid rgb(78, 77, 77);
+    border-color: none;
+    color: #fff;
+}      
+
+#btnAnswers {
+    width: 235px;
+    height: 30px;
+    padding: 2px 0px;
+    background-color:  rgb(75, 76, 76);
+    color: #fff;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
