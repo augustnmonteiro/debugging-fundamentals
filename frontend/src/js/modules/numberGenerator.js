@@ -1,29 +1,43 @@
 import sharedVariables from "./sharedVariables.js";
 
 class NumberGenerator {
-    gerarNumeros() {
-        sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.max - sharedVariables.min) + sharedVariables.min);
-        sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.max - sharedVariables.min) + sharedVariables.min);
-        sharedVariables.nPosicao = Math.floor(Math.random() * 3);
 
-        if (sharedVariables.levels <= 2) {
-            const operacoesPermitidas = sharedVariables.infoNivel.operacoes;
-            console.log(operacoesPermitidas);
-            console.log(operacoesPermitidas.length);
-            sharedVariables.nOperacao = operacoesPermitidas[Math.floor(Math.random() * operacoesPermitidas.length)];
-        } else {
-            sharedVariables.nOperacao = Math.floor(Math.random() * 4);
+    generateRandomNumbers() {
+        try {
+            sharedVariables.manipulateLevel = sharedVariables.matchLevel[sharedVariables.levels + 1];
+    
+            sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.maxNumber - sharedVariables.minNumber) + sharedVariables.minNumber);
+            sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.maxNumber - sharedVariables.minNumber) + sharedVariables.minNumber);
+            sharedVariables.positionUnknownEquation = Math.floor(Math.random() * 3);
+    
+            if (sharedVariables.levels <= 2) {
+                const operacoesPermitidas = sharedVariables.manipulateLevel.operations;
+                console.log(operacoesPermitidas);
+                sharedVariables.nOperation = operacoesPermitidas[Math.floor(Math.random() * operacoesPermitidas.length)];
+            } else {
+                sharedVariables.nOperation = Math.floor(Math.random() * 4);
+            }
+        } catch (error) {
+            console.error(`Error when generating random numbers: ${error}`);
         }
     }
 
-    gerarN1eN2paraMultiplicacaoEDivisao() {
-        sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.maxMultiplicacao - sharedVariables.min) + sharedVariables.min);
-        sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.maxMultiplicacao - sharedVariables.min) + sharedVariables.min);
+    generateN1andN2forMultiplicationAndDivision() {
+        try {
+            sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.maxNumberMultiplication - sharedVariables.minNumber) + sharedVariables.minNumber);
+            sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.maxNumberMultiplication - sharedVariables.minNumber) + sharedVariables.minNumber);
+        } catch (error) {
+            console.error(`Error when generating random n1 and n2 for multiplication: ${error}`);
+        }
     }
 
-    gerarN1eN2() {
-        sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.max - sharedVariables.min) + sharedVariables.min);
-        sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.max - sharedVariables.min) + sharedVariables.min);
+    generateN1andN2() {
+        try {
+            sharedVariables.n1 = Math.floor(Math.random() * (sharedVariables.maxNumber - sharedVariables.minNumber) + sharedVariables.minNumber);
+            sharedVariables.n2 = Math.floor(Math.random() * (sharedVariables.maxNumber - sharedVariables.minNumber) + sharedVariables.minNumber);
+        } catch (error) {
+            console.error(`Error when generating random n1 and n2: ${error}`);
+        }
     }
 }
 

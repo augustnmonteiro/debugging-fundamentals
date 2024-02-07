@@ -1,31 +1,32 @@
 const sharedVariables = {
-    campoPergunta: document.querySelector('#displayQuestions'),
-    btnResposta: document.querySelector('#btnAnswers'),
-    pResposta: document.querySelector('#inputAnswers'),
-    headerQuestions: document.querySelector('#headerQuestions'),
+    inputName: document.querySelector('#inputName'),
+    questionField: document.querySelector('#displayQuestions'),
+    btnSendUserResponse: document.querySelector('#btnAnswers'),
+    inputUserResponse: document.querySelector('#inputAnswers'),
+    nameUser: localStorage.getItem('nameUser'),
     //Números que serão gerados aleatoriamente
     n1: null,
     n2: null,
-    nOperacao: 0,
-    nPosicao: 0,
-    max: 10,
-    min: 1,
-    maxMultiplicacao: 0,
+    nOperation: 0,
+    positionUnknownEquation: 0,
+    maxNumber: 10,
+    minNumber: 1,
+    maxNumberMultiplication: 0,
     //Guardar resultados
-    resultadoDigitadoPeloUsuario: null,
-    resultadoEquacao: null,
-    resultado: null,
+    resultEnteredByUser: null,
+    resultEquation: null,
+    result: null,
     //Informações sobre a partida 
-    vidas: 3,
-    pontos: 0,
+    lives: 3,
+    points: 0,
     rounds: 0,
     levels: 0,   
     //Nivel da partida 
-    infoNivel: 0,
-    niveisUsuario : {
-        1: { operacoes: [0, 1] },
-        2: { operacoes: [0, 1, 2] },
-        3: { operacoes: [0, 1, 2, 3] },
+    manipulateLevel: 0,
+    matchLevel : {
+        1: { operations: [0, 1] },
+        2: { operations: [0, 1, 2] },
+        3: { operations: [0, 1, 2, 3] },
     }
 };
 

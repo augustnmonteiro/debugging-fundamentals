@@ -1,73 +1,58 @@
 import sharedVariables from "./sharedVariables.js";
-
-
-import SharedVariables from "./sharedVariables.js";
+import ManipulationDB from "./manipulationDB.js";
+import * as EventHandlers from "./eventHandlers.js";
 
 class ManipulationElements {
 
     constructor(gameInstance) {
         this.game = gameInstance;
-        this.hearts = 3;
-    }
-
-    manipulationModalAlerts(msg) {
-        const divmodalAlerts = document.querySelector("#divModalAlerts");
-        const modalAlerts = document.querySelector("#modalAlert");
-
-        divmodalAlerts.classList.add("open");
-        modalAlerts.classList.add("alerts");
-        modalAlerts.innerHTML = msg;
-
-        //logica para mudar o designer do alerta baseado no erro ou acerto.
-        // if(estado) {
-
-        // }
-
-        //verificar se o alerta é de erro ou de subir de nivel 
-
-        // if (erro) {
-
-        // }
-
-        divmodalAlerts.addEventListener('click', (e) => {
-            if (e.target.id === 'close' || e.target.id === 'divModalAlerts') {
-                divmodalAlerts.classList.remove('open');
-            }
-        });
-
-        setTimeout(() => {
-            divmodalAlerts.classList.remove('open');
-            // modalAlerts.innerHTML = "";
-        }, 3000);
     }
 
     manipulationResultsFinished(pontos) {
-        const divContainerQuestions = document.querySelector('#containerMainQuestions');
-        const divmodalResults = document.querySelector("#divModalResults");
-        const modalResults = document.querySelector("#modalAlertResults");
-        const nameUser = localStorage.getItem("nameUser");
-
-        divmodalResults.style.display = "flex";
-        divContainerQuestions.style.display = "none";
-        sharedVariables.btnResposta.style.display = 'none';
-        sharedVariables.pResposta.style.display = 'none';
-        sharedVariables.headerQuestions.style.display = 'none';
-        modalResults.classList.add("alerts");
-
-        //Lógica de mostrar os reslutado do usuario abaixo
-
-        modalResults.innerHTML = `FIM DE JOGO ${nameUser}! Você fez: ${pontos} Pontos`;
-
-        this.game.manipulationBD.enviarDadosBd();
+        try {
+            const divContainerQuestions = document.querySelector('#containerMainQuestions');
+            const divmodalResults = document.querySelector("#divModalResults");
+            const modalResults = document.querySelector("#modalAlertResults");
+            const btnRestartGame = document.querySelector("#restartGame");
+            const btnShowRanking = document.querySelector("#showRanking");
+    
+            divmodalResults.style.display = "flex";
+            divContainerQuestions.style.display = "none";
+            modalResults.classList.add("alerts");
+    
+            //Lógica de mostrar os reslutado do usuario abaixo
+    
+            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
+    
+            ManipulationDB.sendMatchDataDB();
+    
+            this.game.manipulationElements.manipulateHearts(`heart2`)
+            this.game.manipulationElements.manipulateHearts(`heart3`)
+    
+            btnRestartGame.addEventListener("click", () => {
+                this.game.resetGame();
+            })
+    
+            btnShowRanking.addEventListener("click", () => {
+                EventHandlers.handleBtnRankingClick();
+            })
+        } catch (error) {
+            console.error(`Error generating game end screen: ${error}`);
+        }
     }
 
-    manipuleVida(heartId) {
-        const heartElement = document.getElementById(heartId);
-
-        if (heartElement.classList.contains("heart")) { 
-            return heartElement.classList.replace('heart', 'empty-heart');
+    manipulateHearts(heartId) {
+        try {
+            const heartElement = document.getElementById(heartId);
+            console.log("Atualizei os heart");
+            if (heartElement.classList.contains("heart")) { 
+                return heartElement.classList.replace('heart', 'empty-heart');
+            }
+            heartElement.classList.replace('empty-heart', 'heart');
+        } catch (error) {
+            console.error(`error when manipulating hearts: ${error}`);
         }
-        heartElement.classList.replace('empty-heart', 'heart');
+
     }
 }
 

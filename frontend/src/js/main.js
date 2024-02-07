@@ -5,4 +5,5 @@ document.addEventListener('DOMContentLoaded', () => {
     eventHandlers.handleBtnRankingClick();
     eventHandlers.handleBtnProfileClick();
     eventHandlers.handleBtnConfigClick();
+    eventHandlers.handleUsername();
 });
