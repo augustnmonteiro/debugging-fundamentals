@@ -33,6 +33,19 @@ font-family: 'Roboto Condensed', sans-serif; */
     align-items: center;
     justify-content: center;
     background: url('../../assets/img/bck.png') center/cover no-repeat;
+    color: r;
+}
+
+#containerStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 500px;
+    background-color: var(--color7);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 #contentElements {
@@ -40,6 +53,31 @@ font-family: 'Roboto Condensed', sans-serif; */
     display: flex;
     justify-content: flex-end;
     margin: -25px 200px 50px 0px;
+}
+
+#containersElementsQuestions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    color: var(--color1);
+    font-family: 'Protest Riot', sans-serif;
+    margin-top: -90px;
+    margin-bottom: 85px;
+}
+
+.configModalGlobal {
+    background: url('../..//assets/img/bck.png') center/cover no-repeat;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--color6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
 }
 
 #greeting {
@@ -62,6 +100,32 @@ font-family: 'Roboto Condensed', sans-serif; */
     font-size: 18px;
     color: rgba(118, 118, 118, 0.678);
     text-align: center;
+}
+
+#inputNameConfig {
+    width: 220px;
+    height: 30px;
+    margin-top: 5px;
+    padding: 1px 5px;
+    border: 0;
+    border-radius: 50px;
+    border-color: none;
+}
+
+#inputNameConfig::placeholder {
+    text-align: center;
+} 
+
+#labelInputUsername {
+    display: flex;
+    flex-direction: column; 
+    color: var(--color1);
+    align-items: center;
+    margin-top: -15px;
+}
+
+#alterNameUser {
+    color: var(--color1);
 }
 
 #btnStart {
@@ -102,8 +166,18 @@ font-family: 'Roboto Condensed', sans-serif; */
     height: 30px;
 }
 
-#divModalRanking.open {
-    display: flex;
+#btnAlterUser {
+    width: 235px;
+    height: 30px;
+    padding: 2px 0px;
+    background-color:  var(--color6);
+    border: 0;
+    border-radius: 50px;
+    color: var(--color1);
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 #modalRanking {
@@ -120,10 +194,6 @@ font-family: 'Roboto Condensed', sans-serif; */
     justify-content: center;
 }
 
-#divModalProfile.open {
-    display: flex;
-}
-
 #modalProfile {
     width: 25%;
     min-width: 300px;
@@ -138,11 +208,21 @@ font-family: 'Roboto Condensed', sans-serif; */
     justify-content: center;
 }
 
-#divModalConfig.open {
+#modalConfig {
+    width: 25%;
+    min-width: 300px;
+    min-height: 330px;
+    background-color: var(--color7);
+    backdrop-filter: blur(30px);
+    padding: 50px;
+    border-radius: 20px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-#modalConfig {
+#modalResults {
     width: 25%;
     min-width: 300px;
     min-height: 330px;
@@ -168,123 +248,14 @@ font-family: 'Roboto Condensed', sans-serif; */
     cursor: pointer;
 }
 
+.open {
+    display: flex;
+}
+
 .title {
     color: var(--color1);
     font-size: 40px;
     font-family: 'Protest Riot', sans-serif;
-
-}
-
-#displayQuestions {
-    color: var(--color1);
-    margin-bottom: 15px;
-    font-size: 50px;
-
-}
-
-#containerStart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 500px;
-    height: 500px;
-    background-color: var(--color7);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-}
-
-#divModalAlerts {
-    align-items: flex-start;
-}
-
-#divModalAlerts.open {
-    display: flex;
-}
-
-#modalAlerts {
-    width: 30%;
-    min-width: 300px;
-    min-height: 110px;
-    background-color: var(--color7);
-    /* backdrop-filter: blur(30px); */
-    padding: 0px 25px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
-}
-
-#divModalResults.open {
-    display: flex;
-}
-
-#modalResults {
-    width: 25%;
-    min-width: 300px;
-    min-height: 330px;
-    background-color: var(--color7);
-    backdrop-filter: blur(30px);
-    padding: 50px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.alerts {
-    font-size: 20px;
-    color: var(--color6);
-}
-
-.configModalGlobal {
-    background: url('../..//assets/img/bck.png') center/cover no-repeat;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: var(--color6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-
-#alterNameUser {
-    color: var(--color1);
-}
-
-#inputNameConfig {
-    width: 220px;
-    height: 30px;
-    margin-top: 5px;
-    padding: 1px 5px;
-    /* background-color: var(--color6); */
-    border: 0;
-    border-radius: 50px;
-    border-color: none;
-}
-
-#inputNameConfig::placeholder {
-    text-align: center;
-} 
-
-#btnAlterUser {
-    width: 235px;
-    height: 30px;
-    padding: 2px 0px;
-    background-color:  var(--color6);
-    border: 0;
-    border-radius: 50px;
-    color: var(--color1);
-    cursor: pointer;
-    margin-top: 5px;
-    font-size: 13px;
-    text-transform: uppercase;
 }
 
 .heart {
@@ -296,6 +267,10 @@ font-family: 'Roboto Condensed', sans-serif; */
     color: var(--color6);
 }
 
+.icon {
+    font-size: 24px; 
+    color: #00deffc7;
+}
 
 .sucess {
     border: 3px solid #38c958 !important;    
@@ -313,28 +288,4 @@ font-family: 'Roboto Condensed', sans-serif; */
 .error:focus {
     border: 3px solid red;
     outline: none;
-}
-
-#containersElementsQuestions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    color: var(--color1);
-    font-family: 'Protest Riot', sans-serif;
-    margin-top: -90px;
-    margin-bottom: 85px;
-}
-
-#labelInputUsername {
-    display: flex;
-    flex-direction: column; 
-    color: var(--color1);
-    align-items: center;
-    margin-top: -15px;
-}
-
-.icon {
-    font-size: 24px; 
-    color: #00deffc7;
 }

@@ -82,11 +82,12 @@ class Game {
             
             pPoints.innerHTML = `Points: ${sharedVariables.points}`;
             pPoints.style.color = '#fff';
-            
+            sharedVariables.questionField.style.color = '#38c958';
             console.log(sharedVariables.points);
-        
+            
             setTimeout(() => {
                 pPoints.style.color = '#383939';
+                sharedVariables.questionField.style.color = '#FF0000';
             }, 250);
         
             if (sharedVariables.points % 20 == 0) {

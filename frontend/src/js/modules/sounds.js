@@ -1,9 +1,12 @@
 class Sounds{
 
     soundPlay(sound) {
-        console.log('Toquei');
-        const soundPlayGame = new Audio(sound);
-        soundPlayGame.play();
+        try {
+            const soundPlayGame = new Audio(sound);
+            soundPlayGame.play();
+        } catch (error) {
+            console.error(`Error playing sound: ${error}`);
+        }
     }
 }
 
