@@ -1,9 +1,11 @@
-import sharedVariables from "./sharedVariables.js"; 
+import sharedVariables from "./sharedVariables.js";
 import Operations from "./operations.js";
 import NumberGenerator from "./numberGenerator.js";
 import Checks from "./checks.js";
-import ManipulationBD from "./manipulationDb.js";
+import checkFields from "./checkFields.js";
 import ManipulationElements from "./manipuleElements.js";
+import sounds from "./sounds.js";
+
 
 class Game {
 
@@ -11,97 +13,164 @@ class Game {
         this.operations = new Operations(this);
         this.checks = new Checks(this);
         this.numberGenerator = new NumberGenerator(this);
-        this.manipulationBD = new ManipulationBD(this);
         this.manipulationElements = new ManipulationElements(this);
-        sharedVariables.infoNivel = sharedVariables.niveisUsuario[sharedVariables.levels + 1];
-        this.apresentarPergunta();
+        this.startGame();
 
-        sharedVariables.btnResposta.addEventListener("click", () => {
-            sharedVariables.resultadoDigitadoPeloUsuario = sharedVariables.pResposta.value;
-            sharedVariables.pResposta.value = "";
-            this.checks.checarResultado();
+        sharedVariables.inputUserResponse.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                sharedVariables.btnSendUserResponse.click();
+            }
+        })
+        sharedVariables.btnSendUserResponse.addEventListener("click", () => {
+            const checkField = checkFields.checkInputResponse(sharedVariables.inputUserResponse);
+            if (checkField) {
+                sharedVariables.resultEnteredByUser = sharedVariables.inputUserResponse.value;
+                this.checks.checkResult();
+            }
         })
     }
 
-    apresentarPergunta() {
-        sharedVariables.rounds++;
-        this.numberGenerator.gerarNumeros();
-        switch (sharedVariables.nOperacao) {
-            case 0:
-                this.operations.somar();
-                break;
-            case 1:
-                this.operations.subtrair();
-                break;
-            case 2:
-                this.operations.multiplicar();
-                break;
-            case 3:
-                this.operations.dividir();
-                break;
-        }
-    }
-
-    diminuirVida() {
-        sharedVariables.vidas -= 1;
-        if (sharedVariables.vidas > 1) {
-            this.manipulationElements.manipulationModalAlerts(`Resposta Errada. Você ainda tem ${sharedVariables.vidas} vidas`);
-            this.manipulationElements.manipuleVida(`heart${sharedVariables.vidas + 1}`);
-            this.apresentarPergunta();
-        } else if (sharedVariables.vidas == 1) {
-            this.manipulationElements.manipulationModalAlerts(`Resposta Errada. Você ainda tem ${sharedVariables.vidas} vida`);
-            this.manipulationElements.manipuleVida(`heart${sharedVariables.vidas + 1}`);
-            this.apresentarPergunta();
-        } else if (sharedVariables.vidas == 0) {
-            this.manipulationElements.manipulationResultsFinished(sharedVariables.pontos);
-        }
-    }
-
-    adicionarPontos() {
-        sharedVariables.pontos += 5;
-        if (sharedVariables.pontos % 20 == 0) {
-            sharedVariables.max += 10;
-            sharedVariables.maxMultiplicacao += 10;
-            sharedVariables.levels++;
-
-            if (sharedVariables.levels <= 2) {
-                sharedVariables.infoNivel = sharedVariables.niveisUsuario[sharedVariables.levels + 1];
+    startGame() {
+        try {
+            sharedVariables.rounds++;
+            this.numberGenerator.generateRandomNumbers();
+            switch (sharedVariables.nOperation) {
+                case 0:
+                    this.operations.addition();
+                    break;
+                case 1:
+                    this.operations.subtraction();
+                    break;
+                case 2:
+                    this.operations.multiplication();
+                    break;
+                case 3:
+                    this.operations.division();
+                    break;
             }
-            this.manipulationElements.manipulationModalAlerts(`Você passou de nível! \n As perguntas ficarão mais difíceis, Boa sorte.`);
-        }
-
-        if (sharedVariables.pontos % 20 == 0 && sharedVariables.vidas < 3) {
-            sharedVariables.vidas += 1;
-            this.manipulationElements.manipuleVida(`heart${sharedVariables.vidas}`);
-            this.manipulationElements.manipulationModalAlerts(`Parabéns! Você fez ${sharedVariables.pontos} pontos e ganhou 1 vida.`);
+        } catch (error) {
+            console.error(`Error when starting game: ${error}`);
         }
     }
 
-    posicao(sinal) {
-        let equacao = "";
-        switch (sharedVariables.nPosicao) {
-            case 0:
-                equacao = `? ${sinal} ${sharedVariables.n2} = ${sharedVariables.resultadoEquacao}`;
-                sharedVariables.resultado = sharedVariables.n1;
-                break;
-            case 1:
-                equacao = `${sharedVariables.n1} ${sinal} ? = ${sharedVariables.resultadoEquacao}`;
-                sharedVariables.resultado = sharedVariables.n2;
-                break;
-            case 2:
-                equacao = `${sharedVariables.n1} ${sinal} ${sharedVariables.n2} = ?`;
-                sharedVariables.resultado = sharedVariables.resultadoEquacao;
-                break;
+    decreaseLife() {
+        try {
+            sharedVariables.lives -= 1;
+    
+            if (sharedVariables.lives > 1) {
+                this.manipulationElements.manipulateHearts(`heart${sharedVariables.lives + 1}`);
+                this.startGame();
+            } else if (sharedVariables.lives == 1) {
+                this.manipulationElements.manipulateHearts(`heart${sharedVariables.lives + 1}`);
+                this.startGame();
+            } else if (sharedVariables.lives == 0) {
+                sounds.soundPlay('../../frontend/assets/sounds/soundFinishedGame.mp3');
+                this.manipulationElements.manipulationResultsFinished(sharedVariables.points);
+            }
+        } catch (error) {
+            console.error(`Error when decreasing lives: ${error}`);
+            
         }
-        return equacao;
     }
 
-    // function resetarJogo() {
-    //     vidas = 3;
-    //     max = 10;
-    //     pontos = 0;
-    //     jogo();
-    // }
+    manipuleLevelLifesAndPoints() {
+        try {
+            const plevel = document.querySelector("#levelQuestions");
+            const pPoints = document.querySelector("#pointsQuestions");
+            
+            sharedVariables.points += 5;
+            
+            pPoints.innerHTML = `Points: ${sharedVariables.points}`;
+            pPoints.style.color = '#fff';
+            
+            console.log(sharedVariables.points);
+        
+            setTimeout(() => {
+                pPoints.style.color = '#383939';
+            }, 250);
+        
+            if (sharedVariables.points % 20 == 0) {
+                sharedVariables.maxNumber += 10;
+                sharedVariables.maxNumberMultiplication += 5;
+                sharedVariables.levels++;
+        
+                plevel.innerHTML = `Level: ${sharedVariables.levels}`;
+                plevel.style.color = '#fff';
+        
+                setTimeout(() => {
+                    plevel.style.color = '#383939';
+                }, 300);
+        
+                if (sharedVariables.levels <= 2) {
+                    sharedVariables.manipulateLevel = sharedVariables.matchLevel[sharedVariables.levels + 1];
+                }
+            }
+        
+            if (sharedVariables.points % 50 == 0 && sharedVariables.lives < 3) {
+                sharedVariables.lives += 1;
+                this.manipulationElements.manipulateHearts(`heart${sharedVariables.lives}`);
+            }
+        } catch (error) {
+            console.error(`Error when manipulating user points, level and lives: ${error}`);
+        }
+    }
+
+    positionUnknownQuestion(sinal) {
+        try {
+            let equation = "";
+            switch (sharedVariables.positionUnknownEquation) {
+                case 0:
+                    equation = `? ${sinal} ${sharedVariables.n2} = ${sharedVariables.resultEquation}`;
+                    sharedVariables.result = sharedVariables.n1;
+                    break;
+                case 1:
+                    equation = `${sharedVariables.n1} ${sinal} ? = ${sharedVariables.resultEquation}`;
+                    sharedVariables.result = sharedVariables.n2;
+                    break;
+                case 2:
+                    equation = `${sharedVariables.n1} ${sinal} ${sharedVariables.n2} = ?`;
+                    sharedVariables.result = sharedVariables.resultEquation;
+                    break;
+            }
+            return equation;            
+        } catch (error) {
+            console.error(`Error when manipulating user points, level and lives: ${error}`);
+        }
+    }
+
+    resetGameData() {
+        try {
+            const plevel = document.querySelector("#levelQuestions");
+            const pPoints = document.querySelector("#pointsQuestions");
+            
+            plevel.innerHTML = `Level: 0`;
+            pPoints.innerHTML = `Points: 0`;
+            sharedVariables.lives = 3;
+            sharedVariables.maxNumber = 10;
+            sharedVariables.minNumber = 1;
+            sharedVariables.maxNumberMultiplication = 0;
+            sharedVariables.rounds = 0;
+            sharedVariables.levels = 0;
+            sharedVariables.points = 0;
+            sharedVariables.manipulateLevel = 0;
+        } catch (error) {
+            console.error(`Error when resetting game data: ${error}`);
+        }
+    }
+
+    resetGame() {
+        try {
+            const divContainerQuestions = document.querySelector('#containerMainQuestions');
+            const divmodalResults = document.querySelector("#divModalResults");
+            divmodalResults.style.display = 'none';
+            divContainerQuestions.style.display = 'flex';
+            this.resetGameData();
+            this.startGame();
+        } catch (error) {
+            console.error(`Error when restarting game: ${error}`);
+            
+        }
+    }
 
 }
 

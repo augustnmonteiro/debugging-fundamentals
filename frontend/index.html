@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Protest+Strike&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Changa+One&family=Protest+Riot&family=Protest+Strike&family=Quicksand:wght@300&family=Roboto+Condensed:wght@300;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./src/style/style.css">
     <link rel="stylesheet" href="./src/style/game.css">
@@ -16,23 +17,34 @@
 
 <body>
     <div id="containerStartGeneral">
-        <div id="contentElements">
-            <button id="btnRanking" style="font-size: 24px;"><svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V288c0-17.7-14.3-32-32-32H256zM32 320c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zm416 96v64c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V416c0-17.7-14.3-32-32-32H480c-17.7 0-32 14.3-32 32z" />
-                </svg></button>
-            <button id="btnProfile"><i class="fa-solid fa-user" style="color: #0c0d0d; font-size:24px;"></i></button>
-            <button id="btnConfig"><i class="fa fa-gear fa-spin" style="font-size:24px;"></i></button>
-        </div>
-
         <div id="containerIndex">
+            <div id="contentElements">
+                <button id="btnRanking"><i class="fa-solid fa-star icon"></i></button>
+                <button id="btnProfile"><i class="fa-solid fa-user icon"></i></button>
+                <button id="btnConfig"><i class="fa fa-gear fa-spin icon"></i></button>
+            </div>
+
+            <h1 style="font-size: 40px;">Mathematical Game</h1>
+            <p id="infor" style="color: #383939; text-align: center; font-size: 18px; margin-bottom: 20px;">Ready to
+                prove that your mind can solve even the most challenging math problems? Test your limits now!</p>
+
             <div id="containerStart">
-                <p id="infor" style="color: #fff;">Prove que você é inteligente...</p>
-                <h1 style="text-align: center; font-size: 40px; color: #fff;">Qual o valor de</br> ? X ? = ?</h1>
-                <h2 id="greeting" class="title"></h2>
-                <input type="text" id="inputName" placeholder="Digite seu nome...">
-                <button id="btnStart"><i class="fa fa-play" style="font-size: 50px; margin-left: 10px;"></i></button>
+                <h1 style="text-align: center; font-size: 40px; line-height: 100px;" class="title">What is the value
+                    of</br> <span style="text-decoration: underline; color: #ff0000;">?
+                        X ? = ?</span></h1>
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: -20px;">
+                    <h2 id="greeting" class="title"></h2>
+
+                    <div id="labelInputUsername">
+                        <label id="labelUsername" style="margin-bottom: 5px;">Enter your Username:</label>
+                        <input type="text" id="inputName">
+                    </div>
+
+                    <span id="inforStartGame" style="margin-top: 10px;">Click the button below to start</span>
+                    <button id="btnStart">
+                        <i class="fa-solid fa-play fa-beat"
+                            style="font-size: 50px; margin-left: 10px; color: #fff;"></i></button>
+                </div>
             </div>
         </div>
 
@@ -55,31 +67,21 @@
         <div id="divModalConfig" class="configModalGlobal">
             <div id="modalConfig">
                 <button id="close">X</button>
-                <h1 id="headerConfig" class="title">Config</h1>
-                <div id="resultsUsersModal"></div>
-                <p id="alterNameUser">Alterar Username:</p>
-                <input type="text" id="inputNameConfig">
-                <button id="btnChangeUser">Alterar</button>
+                <h1 id="headerConfig" class="title" style="margin-bottom: 110px; margin-top: -100px;">Config</h1>
+                <input type="text" id="inputNameConfig" placeholder="Enter a new username...">
+                <button id="btnAlterUser">Change Username</button>
             </div>
-        </div>
-    </div>
-
-    <!-- div modal alertas -->
-    <div id="divModalAlerts" class="configModalGlobal">
-        <div id="modalAlerts">
-            <button id="close">X</button>
-            <p id="modalAlert"></p>
         </div>
     </div>
 
     <!-- div tela final do jogo -->
     <div id="divModalResults" class="configModalGlobal">
         <div id="modalResults">
-            <h1 id="headerResults" class="title">FIM DE JOGO!!!</h1>
+            <h1 id="headerResults" class="title">GAME OVER!!!</h1>
             <p id="modalAlertResults"></p>
             <div id="buttons">
-                <button id="restartGame">Jogar novamente</button>
-                <button id="showIndex">Inicio</button>
+                <button id="restartGame">Play Again</button>
+                <button id="showIndex">Home</button>
                 <button id="showRanking">Ranking</button>
             </div>
         </div>
@@ -88,15 +90,23 @@
     <!-- div tela do jogo -->
     <div id="containerMainQuestions">
         <div id="containerQuestions">
-            <div>
-                <i id="heart1" class="fas fa-heart heart"></i>
-                <i id="heart2" class="fas fa-heart heart"></i>
-                <i id="heart3" class="fas fa-heart heart"></i>
+            <div id="containersElementsQuestions">
+                <p id="levelQuestions">Level: 0</p>
+                <p id="pointsQuestions">Points: 0</p>
+                <div>
+                    <i id="heart1" class="fas fa-heart fa-beat heart"></i>
+                    <i id="heart2" class="fas fa-heart fa-beat heart"></i>
+                    <i id="heart3" class="fas fa-heart fa-beat heart"></i>
+                </div>
             </div>
-            <h1 id="headerQuestions" class="title">Qual o valor de</h1>
-            <p id="displayQuestions"></p>
-            <input type="number" id="inputAnswers">
-            <button id="btnAnswers">Responder</button>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <h1 id="headerQuestions" class="title">What is the value of</h1>
+                <p id="displayQuestions"></p>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <input type="number" id="inputAnswers" placeholder="Enter the answer...">
+                <button id="btnAnswers">Respond</button>
+            </div>
         </div>
     </div>
 

@@ -41,45 +41,6 @@ const insertUserIntoDatabase = (connection, user, res) => {
     });
 };
 
-const updateUser = (connection, user, res) => {
-    return new Promise((resolve, reject) => {
-        const { id, username, browser, operationalSystem, ipAddress } = user;
-        
-        const queryVerifyExistsUserid = `
-            SELECT * FROM \`math-game\`.players WHERE id = ?
-        `;
-        
-        connection.query(queryVerifyExistsUserid, [id], (error, results) => {
-            if (error) {
-                handleDatabaseError(res, error);
-                reject(error);
-            } else {
-                if (results.length === 0) {
-                    reject(new Error(`User Not Found.`));
-                    return;
-                }
-
-                const querySqlUpdate = `
-                    UPDATE \`math-game\`.players 
-                    SET username = ?,
-                    updated_at = NOW(), browser = ?,
-                    operational_system = ?,
-                    ip_address = ? WHERE id = ?
-                `;
-
-                connection.query(querySqlUpdate, [username, browser, operationalSystem, ipAddress, id], (error, results) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(results);
-                    }
-                });
-            }
-        });
-    });
-};
-
-
 const  getRanking = (connection, rankType, limit, res) => {
     return new Promise((resolve, reject) => {
         let timeFrameCondition;
@@ -180,6 +141,5 @@ module.exports = {
     getAllUsersFromDatabase,
     insertUserIntoDatabase,
     getRanking,
-    getRecordOfPlayer, 
-    updateUser
+    getRecordOfPlayer
 };

@@ -4,60 +4,77 @@ class Operations {
 
     constructor(gameInstance) {
         this.game = gameInstance;
+        this.question;
     }
 
-    somar() {
-        if (sharedVariables.levels >= 4) {
-            sharedVariables.resultadoEquacao = sharedVariables.n1 + sharedVariables.n2;
-            let posicaoPergunta = this.game.posicao("+");
-            sharedVariables.campoPergunta.innerHTML = `${posicaoPergunta}`;
-        } else {
-            sharedVariables.resultado = sharedVariables.n1 + sharedVariables.n2;
-            let pergunta = `${sharedVariables.n1} + ${sharedVariables.n2} = X`;
-            sharedVariables.campoPergunta.innerHTML = `${pergunta}`;
+    addition() {
+        try {
+            if (sharedVariables.levels >= 4) {
+                sharedVariables.resultEquation = sharedVariables.n1 + sharedVariables.n2;
+                this.question = this.game.positionUnknownQuestion("+");
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            } else {
+                sharedVariables.result = sharedVariables.n1 + sharedVariables.n2;
+                this.question = `${sharedVariables.n1} + ${sharedVariables.n2} = ?`;
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            }    
+        } catch (error) {
+            console.error(`Error during add operation: ${error}`);
         }
     }
 
-    subtrair() {
-        this.game.checks.alterarPosicaoDoN1comN2SeN1menorN2();
-        if (sharedVariables.levels >= 4) {
-            sharedVariables.resultadoEquacao = sharedVariables.n1 - sharedVariables.n2;
-            let posicaoPergunta = this.game.posicao("-");
-            sharedVariables.campoPergunta.innerHTML = `${posicaoPergunta}`;
-        } else {
-            sharedVariables.resultado = sharedVariables.n1 - sharedVariables.n2;
-            let pergunta = `${sharedVariables.n1} - ${sharedVariables.n2} = X`;
-            sharedVariables.campoPergunta.innerHTML = `${pergunta}`;
+    subtraction() {
+        try {
+            this.game.checks.changePositionOfN1WithN2IfN1IsSmallerThanN2();
+            if (sharedVariables.levels >= 4) {
+                sharedVariables.resultEquation = sharedVariables.n1 - sharedVariables.n2;
+                this.question = this.game.positionUnknownQuestion("-");
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            } else {
+                sharedVariables.result = sharedVariables.n1 - sharedVariables.n2;
+                this.question = `${sharedVariables.n1} - ${sharedVariables.n2} = ?`;
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            }    
+        } catch (error) {
+            console.error(`Error during subtraction operation: ${error}`);
         }
     }
 
-    multiplicar() {
-        this.game.numberGenerator.gerarN1eN2paraMultiplicacaoEDivisao();
-        this.game.checks.alterarPosicaoDoN1comN2SeN1menorN2();
-
-        if (sharedVariables.levels >= 4) {
-            sharedVariables.resultadoEquacao = sharedVariables.n1 * sharedVariables.n2;
-            let posicaoPergunta = this.game.posicao("*");
-            sharedVariables.campoPergunta.innerHTML = `${posicaoPergunta}`;
-        } else {
-            sharedVariables.resultado = sharedVariables.n1 * sharedVariables.n2;
-            let pergunta = `${sharedVariables.n1} * ${sharedVariables.n2} = X`;
-            sharedVariables.campoPergunta.innerHTML = `${pergunta}`;
+    multiplication() {
+        try {
+            this.game.numberGenerator.generateN1andN2forMultiplicationAndDivision();
+            this.game.checks.changePositionOfN1WithN2IfN1IsSmallerThanN2();
+    
+            if (sharedVariables.levels >= 4) {
+                sharedVariables.resultEquation = sharedVariables.n1 * sharedVariables.n2;
+                this.question = this.game.positionUnknownQuestion("*");
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            } else {
+                sharedVariables.result = sharedVariables.n1 * sharedVariables.n2;
+                this.question = `${sharedVariables.n1} * ${sharedVariables.n2} = ?`;
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            }    
+        } catch (error) {
+            console.error(`Error during multiplication operation: ${error}`);
         }
     }
 
-    dividir() {
-        this.game.numberGenerator.gerarN1eN2paraMultiplicacaoEDivisao();
-        this.game.checks.checarSeNumeroSaoDivisiveis();
-
-        if (sharedVariables.levels >= 4) {
-            sharedVariables.resultadoEquacao = sharedVariables.n1 / sharedVariables.n2;
-            let posicaoPergunta = this.game.posicao("/");
-            sharedVariables.campoPergunta.innerHTML = `${posicaoPergunta}`;
-        } else {
-            sharedVariables.resultado = sharedVariables.n1 / sharedVariables.n2;
-            let Pergunta = `${sharedVariables.n1} / ${sharedVariables.n2} = X`;
-            sharedVariables.campoPergunta.innerHTML = `${Pergunta}`;
+    division() {
+        try {
+            this.game.numberGenerator.generateN1andN2forMultiplicationAndDivision();
+            this.game.checks.checkIfNumbersAreDivisible();
+    
+            if (sharedVariables.levels >= 4) {
+                sharedVariables.resultEquation = sharedVariables.n1 / sharedVariables.n2;
+                this.question = this.game.positionUnknownQuestion("/");
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            } else {
+                sharedVariables.result = sharedVariables.n1 / sharedVariables.n2;
+                this.question = `${sharedVariables.n1} / ${sharedVariables.n2} = ?`;
+                sharedVariables.questionField.innerHTML = `${this.question}`;
+            }
+        } catch (error) {
+            console.error(`Error during division operation: ${error}`);
         }
     }
 }
