@@ -12,6 +12,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./src/style/style.css">
     <link rel="stylesheet" href="./src/style/game.css">
+    <link rel="stylesheet" href="./src/style//ranking.css">
+
     <title>Mathematical Game</title>
 </head>
 
@@ -49,18 +51,37 @@
         </div>
 
         <div id="divModalRanking" class="configModalGlobal">
-            <div id="modalRanking">
-                <button id="close">X</button>
-                <h1 id="headerRanking" class="title">Ranking</h1>
-                <div id="resultsUsersModal"></div>
+            <div id="modalRanking" style="display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; height: 30px; top: 0;">
+                    <div style="height: 27px;">
+                        <button id="btnDailyRanking">DAILY</button>
+                        <button id="btnWeeklyRanking">WEEKLY</button>
+                        <button id="btnMonthlyRanking">MONTLHY</button>
+                    </div>
+                    <button id="close">X</button>
+                    
+                </div>
+                
+                <h3 style="color: #08cff7;">Ranking Global Math-Game:</h3>
+                <div id="showRankingDiv"></div>
+                <button id="showMoreResults">More</button>
             </div>
         </div>
 
         <div id="divModalProfile" class="configModalGlobal">
             <div id="modalProfile">
+                <div style="top: 0; height: 40px; width: 80px; display: flex; justify-content: space-between;">
+
+                    <h3 id="headerProfile" class="title" style="font-size: 18px;">Profile: </h3>
+                    <h3 id="usernameProfile" style="color: #fff; font-size: 14px;"></h3>
+                </div>
                 <button id="close">X</button>
-                <h1 id="headerProfile" class="title">Profile</h1>
-                <div id="resultsUsersModal"></div>
+
+                <button id="dailyBtnSelectRecordPeriod">DAILY</button>
+                <button id="weeklyBtnSelectRecordPeriod">WEEKLY</button>
+                <button id="monthlyBtnSelectRecordPeriod">MONTLHY</button>
+
+                <div id="record"></div>
             </div>
         </div>
 
@@ -84,9 +105,20 @@
                 <button id="showIndex">Home</button>
                 <button id="showRanking">Ranking</button>
             </div>
+            <div id="recordUser"></div>
         </div>
     </div>
-
+    <div id="resultsRankingGameOver" style="display: none;">
+        <button id="close">X</button>
+        <select id="selectPeriodRanking">
+            <option value="DAILY">DAILY</option>
+            <option value="WEEKLY">WEEKLY</option>
+            <option value="MONTLHY">MONTLY</option>
+        </select>
+        <div id="resultsUsersModal"></div>
+        <button id="showMoreResults">More</button>
+    </div>
+    
     <!-- div tela do jogo -->
     <div id="containerMainQuestions">
         <div id="containerQuestions">

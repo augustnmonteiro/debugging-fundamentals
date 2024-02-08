@@ -1,6 +1,7 @@
 import sharedVariables from "./sharedVariables.js";
 import ManipulationDB from "./manipulationDB.js";
 import * as EventHandlers from "./eventHandlers.js";
+import RecordChecker from "./manipuleCheckRecordPlayer.js";
 
 class ManipulationElements {
 
@@ -15,20 +16,22 @@ class ManipulationElements {
             const modalResults = document.querySelector("#modalAlertResults");
             const btnRestartGame = document.querySelector("#restartGame");
             const btnShowRanking = document.querySelector("#showRanking");
-    
-            divmodalResults.style.display = "flex";
+            const checkRecordUser = new RecordChecker(sharedVariables.nameUser)
+            divmodalResults.style.display = "flex";         
             divContainerQuestions.style.display = "none";
             modalResults.classList.add("alerts");
     
             //Lógica de mostrar os reslutado do usuario abaixo
     
-            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
+            // modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
+            checkRecordUser.getRecord(sharedVariables.points)
+
     
             ManipulationDB.sendMatchDataDB();
     
             this.game.manipulationElements.manipulateHearts(`heart2`)
             this.game.manipulationElements.manipulateHearts(`heart3`)
-    
+            
             btnRestartGame.addEventListener("click", () => {
                 this.game.resetGame();
             })
@@ -54,6 +57,7 @@ class ManipulationElements {
         }
 
     }
+
 }
 
 export default ManipulationElements;

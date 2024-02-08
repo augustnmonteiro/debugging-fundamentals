@@ -2,6 +2,8 @@ import Game from "./game.js";
 import checkFields from "./checkFields.js";
 import sharedVariables from "./sharedVariables.js";
 import sounds from "./sounds.js";
+import ranking from "./minipulationRanking.js";
+import playerProfaile from "./profile.js";
 
 const divIndex = document.querySelector('#containerIndex');
 const divContainerStart = document.querySelector('#containerStartGeneral');
@@ -33,12 +35,14 @@ export function initializePage() {
             divContainerQuestions.style.display = 'flex';
             sounds.soundPlay('../../frontend/assets/sounds/soundPlayGame.mp3');
             const game = new Game();
+            document.querySelector("#inputAnswers").focus();
         });
     } catch (error) {
         console.error(`Error initializing page: ${error}`);
     }
 
 };
+
 
 export function handleBtnRankingClick() {
     try {
@@ -51,7 +55,8 @@ export function handleBtnRankingClick() {
             btnRanking.addEventListener('click', () => {
                 divModalResults.style.display = 'none';
                 divModalRanking.classList.add('open');
-
+                document.getElementById('showRankingDiv').innerHTML = '';
+                ranking.initialize()
                 divModalRanking.addEventListener('click', (e) => {
                     if (e.target.id === 'close' || e.target.id === 'divModalRanking') {
                         divModalRanking.classList.remove('open');
@@ -66,7 +71,7 @@ export function handleBtnRankingClick() {
                 divModalResults.style.display = 'none';
                 divContainerStart.style.display = 'flex';
                 divModalRanking.classList.add('open');
-
+                ranking.initialize()
                 divModalRanking.addEventListener('click', (e) => {
                     if (e.target.id === 'close' || e.target.id === 'divModalRanking') {
                         divModalRanking.classList.remove('open');
@@ -80,6 +85,45 @@ export function handleBtnRankingClick() {
     }
 };
 
+
+async function fecthPlayrRecord(period) { 
+    const nameUser = localStorage.getItem('nameUser');
+    if(!nameUser) {
+        console.log("Name User Is Invalid.")
+    }
+    await playerProfaile.getRecord(nameUser, period);
+}
+
+function clickInSelectPeriod() {
+    const dailyBtnSelectPeriod = document.getElementById('dailyBtnSelectRecordPeriod');
+    const weeklyBtnSelectPeriod = document.getElementById('weeklyBtnSelectRecordPeriod');
+    const montlhyBtnSelectPeriod = document.getElementById('monthlyBtnSelectRecordPeriod');
+
+    dailyBtnSelectPeriod.addEventListener('click', function() {
+        fecthPlayrRecord('DAILY');
+        
+        dailyBtnSelectPeriod.classList.add('selected');
+        weeklyBtnSelectPeriod.classList.remove('selected');
+        montlhyBtnSelectPeriod.classList.remove('selected');
+    });
+
+    weeklyBtnSelectPeriod.addEventListener('click', function() {
+        fecthPlayrRecord('WEEKLY');
+        
+        dailyBtnSelectPeriod.classList.remove('selected');
+        weeklyBtnSelectPeriod.classList.add('selected');
+        montlhyBtnSelectPeriod.classList.remove('selected');
+    });
+
+    montlhyBtnSelectPeriod.addEventListener('click', function() {
+        fecthPlayrRecord('MONTHLY');
+        dailyBtnSelectPeriod.classList.remove('selected');
+        weeklyBtnSelectPeriod.classList.remove('selected');
+        montlhyBtnSelectPeriod.classList.add('selected');
+    });
+
+}
+
 export function handleBtnProfileClick() {
     try {
         const btnProfile = document.querySelector("#btnProfile");
@@ -89,19 +133,25 @@ export function handleBtnProfileClick() {
             btnProfile.addEventListener('click', () => {
                 divIndex.style.display = 'none';
                 const divModal = document.querySelector('#divModalProfile');
-                divModal.classList.add('open');
 
+                divModal.classList.add('open');
+                const nameUser = localStorage.getItem('nameUser');
+                const usernameProfile = document.querySelector('#usernameProfile');
+                if (usernameProfile) {
+                    usernameProfile.innerText = nameUser;
+                }
+                clickInSelectPeriod();
                 divModal.addEventListener('click', (e) => {
                     if (e.target.id === 'close' || e.target.id === 'divModalProfile') {
                         divModal.classList.remove('open');
                         divIndex.style.display = 'flex';
                     }
-                });
-            })
-        }
-    } catch (error) {
-        console.error(`Error when handling modal profile: ${error}`);
+                })    
+            })   
+        }                
 
+    }  catch(error) {
+        console.log(error)
     }
 };
 

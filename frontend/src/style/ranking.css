@@ -26,3 +26,132 @@
     color: #fff;
     margin-bottom: 20px;
 }
+
+#resultsUsersModal {
+    max-height: 200px;
+}
+
+#modalRanking {
+    width: 400px;
+    height: 350px;
+}
+
+#modalRanking {
+    width: 400px;
+}
+ 
+#showRankingDiv {
+    width: 350px;
+    margin: 30px 0px 0px 0px;
+    border-radius: 10px;
+    border-color: black;
+    background-color: #2b2b2b;
+    height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#showRankingDiv::-webkit-scrollbar {
+    width: 1px;  
+    background-color: transparent; 
+ } 
+
+#showRankingDiv::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
+} 
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espaçamento vertical entre as linhas */
+    border: 2px solid #2b2b2b; /* Cor da borda */
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+th {
+    background-color: #121313;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #908b8b; /* Cor de fundo para linhas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #e0e0e0; /* Cor de fundo para linhas ímpares */
+}
+
+tr:first-child th {
+    border-top-left-radius: 10px; /* Borda arredondada no canto superior esquerdo */
+}
+
+tr:first-child th:last-child {
+    border-top-right-radius: 10px; /* Borda arredondada no canto superior direito */
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; /* Borda arredondada no canto inferior esquerdo */
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; /* Borda arredondada no canto inferior direito */
+}
+
+tr:hover {
+    background-color: #d9d9d9; /* Cor de fundo quando o mouse está sobre a linha */
+}
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espaçamento vertical entre as linhas */
+    border: 2px solid #2b2b2b; /* Cor da borda */
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 12px 20px; /* Espaçamento interno (padding) para os elementos */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+th {
+    background-color: #121313;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #e0e0e0; /* Cor de fundo para linhas ímpares */
+}
+
+tr:first-child th {
+    border-top-left-radius: 10px; /* Borda arredondada no canto superior esquerdo */
+}
+
+tr:first-child th:last-child {
+    border-top-right-radius: 10px; /* Borda arredondada no canto superior direito */
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; /* Borda arredondada no canto inferior esquerdo */
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; /* Borda arredondada no canto inferior direito */
+}
+
+tr:hover {
+    background-color: #d9d9d9; /* Cor de fundo quando o mouse está sobre a linha */
+}
