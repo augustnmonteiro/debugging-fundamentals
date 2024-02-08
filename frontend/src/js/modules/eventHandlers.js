@@ -49,6 +49,7 @@ export function handleBtnRankingClick() {
             btnRanking.addEventListener('click', () => {
                 sharedVariables.divModalResults.style.display = 'none';
                 divModalRanking.classList.add('open');
+                ranking.initialize();
 
                 handleShowModal(divModalRanking);
             });

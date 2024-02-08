@@ -3,7 +3,7 @@ class Ranking {
         this.limit = 100;
         this.selectedPeriod = 'DAILY';
     }
-
+    
     async getRanking(url) {
         if (!url) {
             throw new Error('URL is required');
@@ -72,6 +72,7 @@ class Ranking {
         const urlRanking = `http://localhost:8180/users/game/rank/${periodRanking}?limit=${this.limit}`;
         try {
             const data = await this.getRanking(urlRanking);
+            console.log(data)
             this.createRanking(data?.ranking); 
         } catch (error) {
             console.error(error);

@@ -24,6 +24,8 @@ class RecordChecker {
                     return 0;
                 } else if (sharedVariables.points > maxScore) {
                     const msgNewRecord = `Congratulations you have set a new score record:\n new score record: ${currentPoints}`;
+                    document.querySelector("#modalAlertResults").style.display = 'none'
+
                     divRecordUser.innerHTML += `${msgNewRecord}`;
                     console.log(msgNewRecord);
                     return maxScore;
