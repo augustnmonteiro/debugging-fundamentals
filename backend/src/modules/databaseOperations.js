@@ -68,7 +68,7 @@ const  getRanking = (connection, rankType, limit, res) => {
             SELECT username, level, round, 
             MAX(score) AS score, 
             RANK() OVER (ORDER BY MAX(score) DESC) AS position
-            FROM \`math-game\`.players
+            FROM players
             WHERE ${timeFrameCondition}
             GROUP BY username, level, round, DATE_FORMAT(date, ?)
             ORDER BY score DESC LIMIT ?
@@ -116,7 +116,7 @@ const getRecordOfPlayer = (connection, username, period, res) => {
                 MAX(round) AS max_round,
                 SUM(score) AS total_score,
                 SUM(round) AS total_rounds_played
-                FROM \`math-game\`.players WHERE username = ? AND ${timeFrameCondition};
+                FROM players WHERE username = ? AND ${timeFrameCondition};
             `;
               
             connection.query(querySqlRecord, [username], (error, results) => {

@@ -49,13 +49,12 @@
     width: 220px;
     height: 30px;
     padding: 1px 5px;
-    /* background-color: rgb(78, 77, 77); */
     border: 0 ;
     border-radius: 5px;
     border-color: none;
     color: var(--color1);
     font-size: 18px;
-}      
+}   
 
 #btnAnswers {
     width: 230px;
@@ -70,4 +69,10 @@
     margin-top: 10px;
     font-size: 13px;
     text-transform: uppercase;
+}
+
+#btnAnswers:hover {
+    color: var(--color6);
+    background-color: var(--color1);
+    transition: 300ms ease-out;
 }

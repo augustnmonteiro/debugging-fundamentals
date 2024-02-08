@@ -1,5 +1,6 @@
 import sharedVariables from "./sharedVariables.js";
 import ManipulationDB from "./manipulationDB.js";
+import sounds from "./sounds.js";
 import * as EventHandlers from "./eventHandlers.js";
 import RecordChecker from "./manipuleCheckRecordPlayer.js";
 
@@ -11,21 +12,16 @@ class ManipulationElements {
 
     manipulationResultsFinished(pontos) {
         try {
-            const divContainerQuestions = document.querySelector('#containerMainQuestions');
-            const divmodalResults = document.querySelector("#divModalResults");
             const modalResults = document.querySelector("#modalAlertResults");
             const btnRestartGame = document.querySelector("#restartGame");
             const btnShowRanking = document.querySelector("#showRanking");
-            const checkRecordUser = new RecordChecker(sharedVariables.nameUser)
-            divmodalResults.style.display = "flex";         
-            divContainerQuestions.style.display = "none";
-            modalResults.classList.add("alerts");
-    
-            //Lógica de mostrar os reslutado do usuario abaixo
-    
-            // modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
-            checkRecordUser.getRecord(sharedVariables.points)
-
+            const btnHome = document.querySelector("#showIndex");
+            
+            sharedVariables.divModalResults.style.display = "flex";
+            sharedVariables.divContainerQuestions.style.display = "none";
+            btnRestartGame.focus();
+            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
+            RecordChecker.getRecord();
     
             ManipulationDB.sendMatchDataDB();
     
@@ -33,12 +29,18 @@ class ManipulationElements {
             this.game.manipulationElements.manipulateHearts(`heart3`)
             
             btnRestartGame.addEventListener("click", () => {
+                sounds.soundPlay('../../frontend/assets/sounds/soundPlayGame.mp3');
                 this.game.resetGame();
             })
     
             btnShowRanking.addEventListener("click", () => {
                 EventHandlers.handleBtnRankingClick();
             })
+
+            btnHome.addEventListener("click", () => {
+                location.reload();
+            });
+
         } catch (error) {
             console.error(`Error generating game end screen: ${error}`);
         }
@@ -47,7 +49,6 @@ class ManipulationElements {
     manipulateHearts(heartId) {
         try {
             const heartElement = document.getElementById(heartId);
-            console.log("Atualizei os heart");
             if (heartElement.classList.contains("heart")) { 
                 return heartElement.classList.replace('heart', 'empty-heart');
             }

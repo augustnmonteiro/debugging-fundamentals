@@ -6,7 +6,6 @@ import checkFields from "./checkFields.js";
 import ManipulationElements from "./manipuleElements.js";
 import sounds from "./sounds.js";
 
-
 class Game {
 
     constructor() {
@@ -83,7 +82,6 @@ class Game {
             pPoints.innerHTML = `Points: ${sharedVariables.points}`;
             pPoints.style.color = '#fff';
             sharedVariables.questionField.style.color = '#38c958';
-            console.log(sharedVariables.points);
             
             setTimeout(() => {
                 pPoints.style.color = '#383939';
@@ -161,18 +159,16 @@ class Game {
 
     resetGame() {
         try {
-            const divContainerQuestions = document.querySelector('#containerMainQuestions');
-            const divmodalResults = document.querySelector("#divModalResults");
-            divmodalResults.style.display = 'none';
-            divContainerQuestions.style.display = 'flex';
+            sharedVariables.divModalResults.style.display = 'none';
+            sharedVariables.divContainerQuestions.style.display = 'flex';
             this.resetGameData();
             this.startGame();
+            sharedVariables.inputUserResponse.focus();
         } catch (error) {
             console.error(`Error when restarting game: ${error}`);
             
         }
     }
-
 }
 
 export default Game;

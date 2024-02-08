@@ -12,7 +12,6 @@ class NumberGenerator {
     
             if (sharedVariables.levels <= 2) {
                 const operacoesPermitidas = sharedVariables.manipulateLevel.operations;
-                console.log(operacoesPermitidas);
                 sharedVariables.nOperation = operacoesPermitidas[Math.floor(Math.random() * operacoesPermitidas.length)];
             } else {
                 sharedVariables.nOperation = Math.floor(Math.random() * 4);

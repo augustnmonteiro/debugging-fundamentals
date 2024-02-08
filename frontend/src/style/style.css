@@ -136,6 +136,11 @@ font-family: 'Roboto Condensed', sans-serif; */
     border-radius: 50%;
     cursor: pointer;
     margin-top: 10px;
+    transition: transform 300ms ease-out;
+}
+
+#btnStart:hover {
+    transform: scale(1.1);
 }
 
 #btnRanking {
@@ -192,6 +197,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 #modalProfile {
@@ -206,6 +212,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 #modalConfig {
@@ -220,6 +227,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 #modalResults {
@@ -234,6 +242,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 #close {
@@ -302,4 +311,29 @@ font-family: 'Roboto Condensed', sans-serif; */
 .error:focus {
     border: 3px solid red;
     outline: none;
+}
+
+#divButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#btnShareResults {
+    width: 200px;
+}
+
+.btnFinal {
+    width: 100px;
+    height: 30px;
+    padding: 2px 0px;
+    background-color:  var(--color6);
+    border: 0;
+    border-radius: 50px;
+    color: var(--color1);
+    cursor: pointer;
+    margin: 3px 2px;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-family: 'Protest Riot';
 }

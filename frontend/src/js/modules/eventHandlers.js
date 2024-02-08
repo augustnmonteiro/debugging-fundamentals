@@ -3,40 +3,39 @@ import checkFields from "./checkFields.js";
 import sharedVariables from "./sharedVariables.js";
 import sounds from "./sounds.js";
 import ranking from "./minipulationRanking.js";
-import playerProfaile from "./profile.js";
+import profile from "./profile.js";
 
 const divIndex = document.querySelector('#containerIndex');
 const divContainerStart = document.querySelector('#containerStartGeneral');
+const divModalRanking = document.querySelector('#divModalRanking');
+const btnRanking = document.querySelector("#btnRanking");
+const btnShowRanking = document.querySelector("#showRanking");
+const divlabelInputUsername = document.querySelector('#labelInputUsername');
+const btnStart = document.querySelector('#btnStart');
+const btnProfile = document.querySelector("#btnProfile");
+const divModalProfile = document.querySelector('#divModalProfile');
+const btnConfig = document.querySelector("#btnConfig");
+const btnAlterUsername = document.querySelector('#btnAlterUser');
+const inputAlterUsernameElement = document.querySelector('#inputNameConfig');
+const divModalConfig = document.querySelector('#divModalConfig');
+
 
 export function initializePage() {
     try {
-        const divContainerQuestions = document.querySelector('#containerMainQuestions');
-        const divlabelInputUsername = document.querySelector('#labelInputUsername');
-        const btnStart = document.querySelector('#btnStart');
-
         if (sharedVariables.nameUser) {
             divlabelInputUsername.style.display = 'none';
             document.querySelector('#greeting').innerHTML = `Hello ${sharedVariables.nameUser}`;
+            btnStart.focus();
         }
 
+        sharedVariables.inputName.focus();
         sharedVariables.inputName.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.key === 'Space') {
                 btnStart.click();
             }
         })
 
-        btnStart.addEventListener('click', () => {
-            checkFields.checkUsername();
-            if (!sharedVariables.nameUser) {
-                localStorage.setItem('nameUser', sharedVariables.inputName.value);
-            }
-
-            divContainerStart.style.display = 'none';
-            divContainerQuestions.style.display = 'flex';
-            sounds.soundPlay('../../frontend/assets/sounds/soundPlayGame.mp3');
-            const game = new Game();
-            document.querySelector("#inputAnswers").focus();
-        });
+        btnStart.addEventListener('click', handleInitializeGame);
     } catch (error) {
         console.error(`Error initializing page: ${error}`);
     }
@@ -46,38 +45,37 @@ export function initializePage() {
 
 export function handleBtnRankingClick() {
     try {
-        const divModalRanking = document.querySelector('#divModalRanking');
-        const divModalResults = document.querySelector('#divModalResults');
-        const btnRanking = document.querySelector("#btnRanking");
-        const btnShowRanking = document.querySelector("#showRanking");
-
         if (btnRanking) {
             btnRanking.addEventListener('click', () => {
-                divModalResults.style.display = 'none';
+                sharedVariables.divModalResults.style.display = 'none';
                 divModalRanking.classList.add('open');
-                document.getElementById('showRankingDiv').innerHTML = '';
-                ranking.initialize()
-                divModalRanking.addEventListener('click', (e) => {
-                    if (e.target.id === 'close' || e.target.id === 'divModalRanking') {
-                        divModalRanking.classList.remove('open');
-                        divIndex.style.display = 'flex';
-                    }
-                });
+
+                handleShowModal(divModalRanking);
             });
         }
 
         if (btnShowRanking) {
             btnShowRanking.addEventListener('click', () => {
-                divModalResults.style.display = 'none';
+                sharedVariables.divModalResults.style.display = 'none';
                 divContainerStart.style.display = 'flex';
                 divModalRanking.classList.add('open');
-                ranking.initialize()
-                divModalRanking.addEventListener('click', (e) => {
-                    if (e.target.id === 'close' || e.target.id === 'divModalRanking') {
-                        divModalRanking.classList.remove('open');
-                        location.reload();
-                    }
-                });
+                ranking.initialize();
+
+                if (divModalRanking) {
+                    divModalRanking.addEventListener('click', (e) => {
+                        if (e.target.id === 'close' || e.target.id === 'divModalRanking') {
+                            divModalRanking.classList.remove('open');
+                            location.reload();
+                        }
+                    });
+
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') {
+                            divModalRanking.classList.remove('open');
+                            location.reload();
+                        }
+                    });
+                }
             });
         }
     } catch (error) {
@@ -85,87 +83,42 @@ export function handleBtnRankingClick() {
     }
 };
 
-
-async function fecthPlayrRecord(period) { 
-    const nameUser = localStorage.getItem('nameUser');
-    if(!nameUser) {
-        console.log("Name User Is Invalid.")
-    }
-    await playerProfaile.getRecord(nameUser, period);
-}
-
-function clickInSelectPeriod() {
-    const dailyBtnSelectPeriod = document.getElementById('dailyBtnSelectRecordPeriod');
-    const weeklyBtnSelectPeriod = document.getElementById('weeklyBtnSelectRecordPeriod');
-    const montlhyBtnSelectPeriod = document.getElementById('monthlyBtnSelectRecordPeriod');
-
-    dailyBtnSelectPeriod.addEventListener('click', function() {
-        fecthPlayrRecord('DAILY');
-        
-        dailyBtnSelectPeriod.classList.add('selected');
-        weeklyBtnSelectPeriod.classList.remove('selected');
-        montlhyBtnSelectPeriod.classList.remove('selected');
-    });
-
-    weeklyBtnSelectPeriod.addEventListener('click', function() {
-        fecthPlayrRecord('WEEKLY');
-        
-        dailyBtnSelectPeriod.classList.remove('selected');
-        weeklyBtnSelectPeriod.classList.add('selected');
-        montlhyBtnSelectPeriod.classList.remove('selected');
-    });
-
-    montlhyBtnSelectPeriod.addEventListener('click', function() {
-        fecthPlayrRecord('MONTHLY');
-        dailyBtnSelectPeriod.classList.remove('selected');
-        weeklyBtnSelectPeriod.classList.remove('selected');
-        montlhyBtnSelectPeriod.classList.add('selected');
-    });
-
-}
-
 export function handleBtnProfileClick() {
     try {
-        const btnProfile = document.querySelector("#btnProfile");
-        const divIndex = document.querySelector('#containerIndex');
-
         if (btnProfile) {
             btnProfile.addEventListener('click', () => {
                 divIndex.style.display = 'none';
-                const divModal = document.querySelector('#divModalProfile');
+                divModalProfile.classList.add('open');
 
-                divModal.classList.add('open');
-                const nameUser = localStorage.getItem('nameUser');
                 const usernameProfile = document.querySelector('#usernameProfile');
+
                 if (usernameProfile) {
-                    usernameProfile.innerText = nameUser;
+                    usernameProfile.innerText = sharedVariables.nameUser;
                 }
-                clickInSelectPeriod();
-                divModal.addEventListener('click', (e) => {
+
+                profile.fecthPlayerRecord('DAILY');
+                profile.clickInSelectPeriod();
+
+                divModalProfile.addEventListener('click', (e) => {
                     if (e.target.id === 'close' || e.target.id === 'divModalProfile') {
-                        divModal.classList.remove('open');
+                        divModalProfile.classList.remove('open');
                         divIndex.style.display = 'flex';
                     }
-                })    
-            })   
-        }                
-
-    }  catch(error) {
-        console.log(error)
+                })
+                handleShowModal(divModalProfile);
+            })
+        }
+    } catch (error) {
+        console.error(`Error when handling modal profile: ${error}`);
     }
 };
 
 export function handleBtnConfigClick() {
     try {
-        const btnConfig = document.querySelector("#btnConfig");
-        const btnAlterUsername = document.querySelector('#btnAlterUser');
-        const inputAlterUsernameElement = document.querySelector('#inputNameConfig');
-
         if (btnConfig) {
             btnConfig.addEventListener('click', () => {
                 divIndex.style.display = 'none';
-                const divModal = document.querySelector('#divModalConfig');
-                divModal.classList.add('open');
+                divModalConfig.classList.add('open');
 
                 inputAlterUsernameElement.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
@@ -178,27 +131,47 @@ export function handleBtnConfigClick() {
                     if (inputAlterUsernameElement.value != '') {
                         localStorage.setItem('nameUser', inputAlterUsernameElement.value);
                         location.reload();
-                        inputAlterUsernameElement.value = '';
-                    }
-                    inputAlterUsernameElement.classList.add('error');
-
-                    setTimeout(() => {
-                        inputAlterUsernameElement.classList.remove('error');
-                    }, 1000);
-                });
-
-                divModal.addEventListener('click', (e) => {
-                    if (e.target.id === 'close' || e.target.id === 'divModalConfig') {
-                        divModal.classList.remove('open');
-                        divIndex.style.display = 'flex';
                     }
                 });
+
+                handleShowModal(divModalConfig);
             })
         }
     } catch (error) {
         console.error(`Error when handling modal config: ${error}`);
     }
 };
+
+function handleInitializeGame() {
+    checkFields.checkUsername();
+    if (!sharedVariables.nameUser) {
+        localStorage.setItem('nameUser', sharedVariables.inputName.value);
+    }
+
+    divContainerStart.style.display = 'none';
+    sharedVariables.divContainerQuestions.style.display = 'flex';
+    sounds.soundPlay('../../frontend/assets/sounds/soundPlayGame.mp3');
+    const game = new Game();
+    sharedVariables.inputUserResponse.focus();
+}
+
+function handleShowModal(modal) {
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target.id === 'close' || e.target === modal) {
+                modal.classList.remove('open');
+                divIndex.style.display = 'flex';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('open');
+                divIndex.style.display = 'flex';
+            }
+        });
+    }
+}
 
 export function handleUsername() {
     try {

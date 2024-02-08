@@ -1,10 +1,12 @@
 const sharedVariables = {
-    inputName: document.querySelector('#inputName'),
-    questionField: document.querySelector('#displayQuestions'),
-    btnSendUserResponse: document.querySelector('#btnAnswers'),
-    inputUserResponse: document.querySelector('#inputAnswers'),
     nameUser: localStorage.getItem('nameUser'),
-    //Números que serão gerados aleatoriamente
+    inputName: document.querySelector('#inputName'),
+    divContainerQuestions: document.querySelector('#containerMainQuestions'),
+    questionField: document.querySelector('#displayQuestions'),
+    inputUserResponse: document.querySelector('#inputAnswers'),
+    btnSendUserResponse: document.querySelector('#btnAnswers'),
+    divModalResults: document.querySelector("#divModalResults"),
+    //Numbers that will be generated randomly
     n1: null,
     n2: null,
     nOperation: 0,
@@ -12,16 +14,16 @@ const sharedVariables = {
     maxNumber: 10,
     minNumber: 1,
     maxNumberMultiplication: 0,
-    //Guardar resultados
+    //Temporarily save results
     resultEnteredByUser: null,
     resultEquation: null,
     result: null,
-    //Informações sobre a partida 
+    //Match information
     lives: 3,
     points: 0,
     rounds: 0,
     levels: 0,   
-    //Nivel da partida 
+    //match difficulty based on level
     manipulateLevel: 0,
     matchLevel : {
         1: { operations: [0, 1] },

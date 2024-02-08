@@ -1,3 +1,5 @@
+import sharedVariables from "./sharedVariables.js";
+
 class Profile {
     async getRecord(username, period) {
         try {
@@ -27,8 +29,66 @@ class Profile {
             `;
             recordDiv.innerHTML += createElementHtml;
             console.log(data);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
+        }
+    }
+
+    async fecthPlayerRecord(period) {
+        if (!sharedVariables.nameUser) {
+            console.log("Name User Is Invalid.")
+        }
+        await this.getRecord(sharedVariables.nameUser, period);
+    }
+
+    clickInSelectPeriod() {
+        const dailyBtnSelectPeriod = document.getElementById('dailyBtnSelectRecordPeriod');
+        const weeklyBtnSelectPeriod = document.getElementById('weeklyBtnSelectRecordPeriod');
+        const montlhyBtnSelectPeriod = document.getElementById('monthlyBtnSelectRecordPeriod');
+
+        dailyBtnSelectPeriod.addEventListener('click', () => {
+            this.handlePeriodRecords('DAILY');
+        });
+
+        weeklyBtnSelectPeriod.addEventListener('click', () => {
+            this.handlePeriodRecords('WEEKLY');
+        });
+
+        montlhyBtnSelectPeriod.addEventListener('click', () => {
+            this.handlePeriodRecords('MONTHLY');
+        });
+    }
+
+    handlePeriodRecords(period) {
+        const dailyBtnSelectPeriod = document.getElementById('dailyBtnSelectRecordPeriod');
+        const weeklyBtnSelectPeriod = document.getElementById('weeklyBtnSelectRecordPeriod');
+        const montlhyBtnSelectPeriod = document.getElementById('monthlyBtnSelectRecordPeriod');
+
+        switch (period) {
+            case 'DAILY':
+                this.fecthPlayerRecord('DAILY');
+
+                dailyBtnSelectPeriod.classList.add('selected');
+                weeklyBtnSelectPeriod.classList.remove('selected');
+                montlhyBtnSelectPeriod.classList.remove('selected');
+                break;
+            case 'WEEKLY':
+                this.fecthPlayerRecord('WEEKLY');
+
+                dailyBtnSelectPeriod.classList.remove('selected');
+                weeklyBtnSelectPeriod.classList.add('selected');
+                montlhyBtnSelectPeriod.classList.remove('selected');
+                break;
+            case 'MONTHLY':
+                this.fecthPlayerRecord('MONTHLY');
+
+                dailyBtnSelectPeriod.classList.remove('selected');
+                weeklyBtnSelectPeriod.classList.remove('selected');
+                montlhyBtnSelectPeriod.classList.add('selected');
+                break;
+            default:
+                console.error('Period Invalid');
+                break;
         }
     }
 }
