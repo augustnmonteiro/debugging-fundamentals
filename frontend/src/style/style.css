@@ -258,6 +258,20 @@ font-family: 'Roboto Condensed', sans-serif; */
     font-family: 'Protest Riot', sans-serif;
 }
 
+/* #monthlyBtnSelectRecordPeriod, #weeklyBtnSelectRecordPeriod, #dailyBtnSelectRecordPeriod {
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    padding: 2px;
+    margin-right: 5px;
+    margin-left: 5px;
+} */
+.selected {
+    background-color: rgb(0, 119, 255);
+    color: black;
+    transform: scale(1.1);
+}
+
 .heart {
     color: red;
     cursor: pointer;
