@@ -1,7 +1,7 @@
 class Ranking {
     constructor() {
-        this.limit = 100;
-        this.selectedPeriod = 'DAILY';
+        this.limit = 50;
+        this.selectedPeriod = 'WEEKLY';
     }
     
     async getRanking(url) {
@@ -79,7 +79,6 @@ class Ranking {
             
             if (!data || data.length === 0) {
                 document.getElementById('showRankingDiv').style.display = 'none';
-                document.getElementById('btnsPeriodRanking').style.display = 'none';
                 document.getElementById('showMoreResults').style.display = 'none';
             } else {
                 document.getElementById('showRankingDiv').style.display = 'block';
@@ -138,12 +137,12 @@ class Ranking {
         });
     
         btnShowMoreResults.addEventListener('click', () => {
-            this.limit += 10;
+            this.limit += 50;
             this.handlePeriodChange(this.selectedPeriod, this.limit);
             
         });
     
-        btnDailyRanking.click();
+        btnWeeklyRanking.click();
     }
     
 }
