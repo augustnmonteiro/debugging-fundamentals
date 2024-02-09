@@ -77,3 +77,19 @@
     background-color: var(--color1);
     transition: 300ms ease-out;
 }
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #f00; /* Cor dos confetes */
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    animation: confetti-fall linear 3s infinite;
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}

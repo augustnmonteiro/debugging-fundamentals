@@ -1,7 +1,25 @@
 import sharedVariables from "./sharedVariables.js";
 
 class RecordChecker {
+
+    generateConfetti() {
+        const container = document.getElementById('confetti-container');
+        const colors = ['#f00', '#0f0', '#00f', '#ff0']; 
     
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; 
+            container.appendChild(confetti);
+    
+            setTimeout(() => {
+                container.removeChild(confetti);
+            }, 5000); 
+        }
+    }
+
     async getRecord() {
         try {
             const urlAPI = `http://localhost:8180/game/${sharedVariables.nameUser}/record/DAILY`;
@@ -23,10 +41,16 @@ class RecordChecker {
                     console.log('No record available. You set the first score.');
                     return 0;
                 } else if (sharedVariables.points > maxScore) {
-                    const msgNewRecord = `Congratulations you have set a new score record:\n new score record: ${currentPoints}`;
+                    const p = document.createElement('p');
+                    const msgNewRecord = `
+                        Congratulations you have set a new score record.
+                        '\n'New Score: ${sharedVariables.points}.
+                    `;
+                    p.textContent = `${msgNewRecord}`
+                    this.generateConfetti()
                     document.querySelector("#modalAlertResults").style.display = 'none'
 
-                    divRecordUser.innerHTML += `${msgNewRecord}`;
+                    divRecordUser.appendChild(p);
                     console.log(msgNewRecord);
                     return maxScore;
                 } else {
