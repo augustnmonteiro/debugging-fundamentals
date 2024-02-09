@@ -60,7 +60,7 @@ export function handleBtnRankingClick() {
                 sharedVariables.divModalResults.style.display = 'none';
                 divContainerStart.style.display = 'flex';
                 divModalRanking.classList.add('open');
-
+                ranking.initialize()
                 if (divModalRanking) {
                     divModalRanking.addEventListener('click', (e) => {
                         if (e.target.id === 'close' || e.target.id === 'divModalRanking') {

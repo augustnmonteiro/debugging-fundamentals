@@ -6,7 +6,7 @@
     --color5: #fffedb;
     --color6: #ffffff;
     --color7: #00deffc7;
-
+    --color8: #0d0e0e;
 }
 
 #containerMainRanking {
@@ -25,7 +25,7 @@
     justify-content: center;
     width: 500px;
     height: 500px;
-    background-color: #333;
+    background-color: var(--color1);
     /* border: 2px solid #fff; */
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
@@ -61,7 +61,7 @@
 }
 
 #titleLeaderBoard {
-    color: #0d0e0e;
+    color: var(--color8);
     margin-top: -10px;
     font-family: 'Protest Riot', sans-serif; font-size: 30px;
 }
@@ -77,19 +77,19 @@
     margin: 10px 0px;
     cursor: pointer;
     border-radius: 10px;
-    background-color: #383939;
-    color: #ffffff;
+    background-color: var(--color1);
+    color: var(--color6);
     font-family: 'Protest Riot', sans-serif;
 }
 
 #showRankingDiv::-webkit-scrollbar {
-    width: 1px;  
+    width: 0.5px;  
     background-color: transparent; 
  } 
 
 #showRankingDiv::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2); 
-    border-radius: 5px; 
+    background-color: var(--color7); 
+    border-radius: 10px; 
 } 
 
 #showMoreResults {
@@ -110,7 +110,7 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px; 
-    border: 2px solid #383939; /* Cor da borda */
+    border: 2px solid var(--color1); /* Cor da borda */
     /* border-radius: 10px; */
 }
 
@@ -127,32 +127,13 @@ th {
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 16px;
-    color: #ffffff;
+    color: var(--color6);
 }
 
 tr:nth-child(even) {
     background-color: #6dfa09; /* Cor de fundo para linhas pares */
 }
 
-tr:nth-child(odd) {
-    background-color: var(--color6); /* Cor de fundo para linhas ímpares */
-}
-
-tr:first-child th {
-    border-top-left-radius: 10px; /* Borda arredondada no canto superior esquerdo */
-}
-
-tr:first-child th:last-child {
-    border-top-right-radius: 10px; /* Borda arredondada no canto superior direito */
-}
-
-tr:last-child td:first-child {
-    border-bottom-left-radius: 10px; /* Borda arredondada no canto inferior esquerdo */
-}
-
-tr:last-child td:last-child {
-    border-bottom-right-radius: 10px; /* Borda arredondada no canto inferior direito */
-}
 
 tr:nth-child(-n+3) {
     background-color: rgb(55, 250, 21);
@@ -160,5 +141,5 @@ tr:nth-child(-n+3) {
 }
 tr:nth-child(n+5) {
     background-color: var(--color7);
-    color: #101010;
+    color: var(--color1);
 }

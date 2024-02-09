@@ -31,6 +31,8 @@ class RecordChecker {
             const data = await response.json();
 
             let divRecordUser = document.querySelector('#recordUser');
+            divRecordUser.innerHTML = '';
+            console.log(data.dataRecordPlayer[0].max_score);
 
             if (data.dataRecordPlayer && data.dataRecordPlayer.length > 0) {
                 const maxScore = data.dataRecordPlayer[0].max_score;

@@ -47,6 +47,10 @@ class Game {
                     this.operations.division();
                     break;
             }
+            //DEBUG ONLYYYYY]
+            // setTimeout(() => {
+            //     document.querySelector("#inputAnswers").value = sharedVariables.result;
+            // }, 50);
         } catch (error) {
             console.error(`Error when starting game: ${error}`);
         }
