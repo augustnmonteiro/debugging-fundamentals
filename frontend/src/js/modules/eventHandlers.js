@@ -60,7 +60,6 @@ export function handleBtnRankingClick() {
                 sharedVariables.divModalResults.style.display = 'none';
                 divContainerStart.style.display = 'flex';
                 divModalRanking.classList.add('open');
-                ranking.initialize();
 
                 if (divModalRanking) {
                     divModalRanking.addEventListener('click', (e) => {
@@ -120,7 +119,6 @@ export function handleBtnConfigClick() {
             btnConfig.addEventListener('click', () => {
                 divIndex.style.display = 'none';
                 divModalConfig.classList.add('open');
-
                 inputAlterUsernameElement.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
                         btnAlterUsername.click();

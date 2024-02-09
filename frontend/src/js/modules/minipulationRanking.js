@@ -5,6 +5,7 @@ class Ranking {
     }
     
     async getRanking(url) {
+        console.log(url)
         if (!url) {
             throw new Error('URL is required');
         }
@@ -67,17 +68,32 @@ class Ranking {
         return selectedValue;
     }
 
-    async handlePeriodChange(periodRanking) {
+    async handlePeriodChange(periodRanking, limit) {
         this.selectedPeriod = periodRanking;
-        const urlRanking = `http://localhost:8180/users/game/rank/${periodRanking}?limit=${this.limit}`;
+        
         try {
+            const urlRanking = `http://localhost:8180/users/game/rank/${periodRanking}?limit=${limit}`;
+            console.log(urlRanking);
+            
             const data = await this.getRanking(urlRanking);
-            console.log(data)
-            this.createRanking(data?.ranking); 
+            
+            if (!data || data.length === 0) {
+                document.getElementById('showRankingDiv').style.display = 'none';
+                document.getElementById('btnsPeriodRanking').style.display = 'none';
+                document.getElementById('showMoreResults').style.display = 'none';
+            } else {
+                document.getElementById('showRankingDiv').style.display = 'block';
+                document.getElementById('btnsPeriodRanking').style.display = 'block';
+                document.getElementById('showMoreResults').style.display = 'block';
+                this.createRanking(data?.ranking); 
+            }
         } catch (error) {
             console.error(error);
+            document.getElementById('showRankingDiv').style.display = 'none';
         }
     }
+    
+    
     
     clearPreviousResults() {
         const resultsUsersModal = document.getElementById('resultsUsersModal');
@@ -88,6 +104,7 @@ class Ranking {
         const btnDailyRanking = document.querySelector('#btnDailyRanking');
         const btnWeeklyRanking = document.querySelector('#btnWeeklyRanking');
         const btnMonthlyRanking = document.querySelector('#btnMonthlyRanking');
+        const btnShowMoreResults = document.querySelector('#showMoreResults');
     
         const applyStyle = (selectedButton) => {
             const buttons = [btnDailyRanking, btnWeeklyRanking, btnMonthlyRanking];
@@ -104,23 +121,28 @@ class Ranking {
     
         btnDailyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
-            this.handlePeriodChange('DAILY');
+            this.handlePeriodChange('DAILY', this.limit); 
             applyStyle(btnDailyRanking);
         });
     
         btnWeeklyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
-            this.handlePeriodChange('WEEKLY');
+            this.handlePeriodChange('WEEKLY', this.limit); 
             applyStyle(btnWeeklyRanking);
         });
     
         btnMonthlyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
-            this.handlePeriodChange('MONTLHY');
+            this.handlePeriodChange('MONTLHY', this.limit); 
             applyStyle(btnMonthlyRanking);
         });
     
-        // Inicialmente, o botão de ranking diário será ativado
+        btnShowMoreResults.addEventListener('click', () => {
+            this.limit += 10;
+            this.handlePeriodChange(this.selectedPeriod, this.limit);
+            
+        });
+    
         btnDailyRanking.click();
     }
     
