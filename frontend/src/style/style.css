@@ -33,7 +33,6 @@ font-family: 'Roboto Condensed', sans-serif; */
     align-items: center;
     justify-content: center;
     background: url('../../assets/img/bck.png') center/cover no-repeat;
-    color: r;
 }
 
 #containerStart {
@@ -110,10 +109,13 @@ font-family: 'Roboto Condensed', sans-serif; */
     border: 0;
     border-radius: 50px;
     border-color: none;
+    background-color: var(--color1);
+    color: var(--color6);
 }
 
 #inputNameConfig::placeholder {
     text-align: center;
+    color: rgba(190, 190, 190, 0.678);
 } 
 
 #labelInputUsername {
@@ -175,14 +177,15 @@ font-family: 'Roboto Condensed', sans-serif; */
     width: 235px;
     height: 30px;
     padding: 2px 0px;
-    background-color:  var(--color6);
+    background-color: var(--color1);
     border: 0;
     border-radius: 50px;
-    color: var(--color1);
+    color: var(--color6);
     cursor: pointer;
     margin-top: 5px;
-    font-size: 13px;
+    font-size: 15px;
     text-transform: uppercase;
+    font-family: 'Protest Riot';
 }
 
 #modalRanking {
@@ -268,9 +271,9 @@ font-family: 'Roboto Condensed', sans-serif; */
 }
 
 .selected {
-    background-color: rgb(0, 119, 255);
-    color: black;
-    transform: scale(1.1);
+    background-color: var(--color7) !important;
+    color: var(--color1) !important;
+    transform: scale(1.07);
 }
 
 .heart {
@@ -328,4 +331,30 @@ font-family: 'Roboto Condensed', sans-serif; */
     font-size: 13px;
     text-transform: uppercase;
     font-family: 'Protest Riot';
+}
+
+.btnFilter {
+    width: 80px;
+    height: 27px;
+    margin: 10px 0px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #383939;
+    color: #ffffff;
+    font-family: 'Protest Riot', sans-serif;
+}
+
+.recordsUser {
+    font-size: 23px;
+    color: var(--color6);
+    background-color: var(--color1);
+    margin-bottom: 3px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    text-align: center;
+}
+
+#record {
+    width: 300px;
+    max-width: 360px;
 }

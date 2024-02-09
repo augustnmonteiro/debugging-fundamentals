@@ -119,6 +119,8 @@ export function handleBtnConfigClick() {
             btnConfig.addEventListener('click', () => {
                 divIndex.style.display = 'none';
                 divModalConfig.classList.add('open');
+                document.querySelector('#usernameConfig').innerHTML = sharedVariables.nameUser;
+
                 inputAlterUsernameElement.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
                         btnAlterUsername.click();

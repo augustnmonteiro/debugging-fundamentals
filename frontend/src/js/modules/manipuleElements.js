@@ -3,6 +3,7 @@ import ManipulationDB from "./manipulationDB.js";
 import sounds from "./sounds.js";
 import * as EventHandlers from "./eventHandlers.js";
 import RecordChecker from "./manipuleCheckRecordPlayer.js";
+import share from "./shareResults.js";
 
 class ManipulationElements {
 
@@ -10,9 +11,10 @@ class ManipulationElements {
         this.game = gameInstance;
     }
 
-    manipulationResultsFinished(pontos) {
+    manipulationResultsFinished(points) {
         try {
             const modalResults = document.querySelector("#modalAlertResults");
+            const btnShare = document.querySelector("#btnShareResults");
             const btnRestartGame = document.querySelector("#restartGame");
             const btnShowRanking = document.querySelector("#showRanking");
             const btnHome = document.querySelector("#showIndex");
@@ -20,7 +22,7 @@ class ManipulationElements {
             sharedVariables.divModalResults.style.display = "flex";
             sharedVariables.divContainerQuestions.style.display = "none";
             btnRestartGame.focus();
-            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${pontos} Points`;
+            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${points} Points`;
             RecordChecker.getRecord();
     
             ManipulationDB.sendMatchDataDB();
@@ -28,6 +30,10 @@ class ManipulationElements {
             this.game.manipulationElements.manipulateHearts(`heart2`)
             this.game.manipulationElements.manipulateHearts(`heart3`)
             
+            btnShare.addEventListener("click", () =>{
+                share.shareResults();
+            });
+
             btnRestartGame.addEventListener("click", () => {
                 sounds.soundPlay('../../frontend/assets/sounds/soundPlayGame.mp3');
                 this.game.resetGame();

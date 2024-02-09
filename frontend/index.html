@@ -17,9 +17,8 @@
     <title>Mathematical Game</title>
 </head>
 
-<body id="confetti-container">
+<body id="confettiContainer">
     <div id="containerStartGeneral">
-        <!-- <div id="confetti-container"></div> -->
         <div id="containerIndex">
             <div id="contentElements">
                 <button id="btnRanking"><i class="fa-solid fa-star icon"></i></button>
@@ -62,9 +61,8 @@
                         <button id="btnMonthlyRanking">MONTLHY</button>
                     </div>
                     <button id="close">X</button>
-                    
                 </div>
-                
+
                 <div id="showRankingDiv"></div>
                 <button id="showMoreResults">+</button>
             </div>
@@ -72,17 +70,15 @@
 
         <div id="divModalProfile" class="configModalGlobal">
             <div id="modalProfile">
-                <div>
+                <h1 id="headerProfile" class="title">Profile </h1>
+                <h1 id="usernameProfile" style="color: #fff; font-size: 40px;"></h1>
 
-                    <h3 id="headerProfile" class="title" style="font-size: 18px;">Profile: </h3>
-                    <h3 id="usernameProfile" style="color: #fff; font-size: 14px;"></h3>
-                </div>
                 <button id="close">X</button>
-
-                <button id="dailyBtnSelectRecordPeriod">DAILY</button>
-                <button id="weeklyBtnSelectRecordPeriod">WEEKLY</button>
-                <button id="monthlyBtnSelectRecordPeriod">MONTLHY</button>
-
+                <div id="btnFilterProfile">
+                    <button id="dailyBtnSelectRecordPeriod" class="btnFilter">DAILY</button>
+                    <button id="weeklyBtnSelectRecordPeriod" class="btnFilter">WEEKLY</button>
+                    <button id="monthlyBtnSelectRecordPeriod" class="btnFilter">MONTLHY</button>
+                </div>
                 <div id="record"></div>
             </div>
         </div>
@@ -90,7 +86,8 @@
         <div id="divModalConfig" class="configModalGlobal">
             <div id="modalConfig">
                 <button id="close">X</button>
-                <h1 id="headerConfig" class="title" style="margin-bottom: 110px; margin-top: -100px;">Config</h1>
+                <h1 id="headerConfig" class="title" style="margin-bottom: 45px; margin-top: -100px;">Config</h1>
+                <h1 id="usernameConfig" style="color: #fff; font-size: 40px; margin-bottom: 40px;"></h1>
                 <input type="text" id="inputNameConfig" placeholder="Enter a new username...">
                 <button id="btnAlterUser">Change Username</button>
             </div>
@@ -100,8 +97,10 @@
     <!-- div tela final do jogo -->
     <div id="divModalResults" class="configModalGlobal">
         <div id="modalResults">
-            <h1 id="headerResults" class="title">GAME OVER!!!</h1>
-            <p id="modalAlertResults"></p>
+            <div id="resultsUser">
+                <h1 id="headerResults" class="title">GAME OVER!!!</h1>
+                <p id="modalAlertResults"></p>
+            </div>
             <div id="divButtons">
                 <button id="btnShareResults" class="btnFinal">Share</button>
                 <div style="display: flex; margin-top: 10px;">
@@ -123,7 +122,7 @@
         <div id="resultsUsersModal"></div>
         <button id="showMoreResults">More</button>
     </div>
-    
+
     <!-- div tela do jogo -->
     <div id="containerMainQuestions">
         <div id="containerQuestions">

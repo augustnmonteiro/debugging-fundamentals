@@ -22,7 +22,8 @@ const sharedVariables = {
     lives: 3,
     points: 0,
     rounds: 0,
-    levels: 0,   
+    levels: 0,
+    UserSetANewRecord: false, 
     //match difficulty based on level
     manipulateLevel: 0,
     matchLevel : {

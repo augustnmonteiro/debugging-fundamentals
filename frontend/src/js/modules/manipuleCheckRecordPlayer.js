@@ -3,7 +3,7 @@ import sharedVariables from "./sharedVariables.js";
 class RecordChecker {
 
     generateConfetti() {
-        const container = document.getElementById('confetti-container');
+        const container = document.getElementById('confettiContainer');
         const colors = ['#f00', '#0f0', '#00f', '#ff0']; 
     
         for (let i = 0; i < 50; i++) {
@@ -29,29 +29,26 @@ class RecordChecker {
             }
 
             const data = await response.json();
-            console.log(data);
 
             let divRecordUser = document.querySelector('#recordUser');
-            console.log(data.dataRecordPlayer[0].max_score);
 
             if (data.dataRecordPlayer && data.dataRecordPlayer.length > 0) {
                 const maxScore = data.dataRecordPlayer[0].max_score;
-                console.log(maxScore)
                 if (maxScore === null) {
                     console.log('No record available. You set the first score.');
                     return 0;
                 } else if (sharedVariables.points > maxScore) {
+                    sharedVariables.UserSetANewRecord = true;
                     const p = document.createElement('p');
                     const msgNewRecord = `
                         Congratulations you have set a new score record.
                         '\n'New Score: ${sharedVariables.points}.
                     `;
-                    p.textContent = `${msgNewRecord}`
+                    p.textContent = `${msgNewRecord}`;
                     this.generateConfetti()
                     document.querySelector("#modalAlertResults").style.display = 'none'
 
                     divRecordUser.appendChild(p);
-                    console.log(msgNewRecord);
                     return maxScore;
                 } else {
                     console.log('You did not beat the record.');

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { insertUserIntoDatabase } = require('../modules/databaseOperations.js');
+const { getAllUsersFromDatabase, insertUserIntoDatabase } = require('../modules/databaseOperations.js');
 
 router.get('/', async (req, res) => {
     try {
