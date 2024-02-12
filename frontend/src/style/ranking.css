@@ -6,7 +6,7 @@
     --color5: #fffedb;
     --color6: #ffffff;
     --color7: #00deffc7;
-    --color8: #0d0e0e;
+    --color8: #ff0000;
 }
 
 #containerMainRanking {
@@ -26,7 +26,6 @@
     width: 500px;
     height: 500px;
     background-color: var(--color1);
-    /* border: 2px solid #fff; */
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
@@ -41,30 +40,25 @@
 }
 
 #modalRanking {
-    width: 550px;
-    height: 500px;
-}
-
-#modalRanking {
     width: 400px;
+    height: 400px;
 }
  
 #showRankingDiv {
     width: 400px;
     margin: 30px 0px 0px 0px;
     border-radius: 10px;
-    /* border-color: black; */
     border-bottom: var(--color1);
-    background-color: var(--color7);
     height: 450px;
     max-height: 450px;
     overflow-y: auto;
 }
 
 #titleLeaderBoard {
-    color: var(--color8);
+    color: var(--color1);
     margin-top: -10px;
-    font-family: 'Protest Riot', sans-serif; font-size: 30px;
+    font-family: 'Protest Riot', sans-serif; 
+    font-size: 40px;
 }
 #btnsPeriodRanking {
     display: flex; 
@@ -72,7 +66,9 @@
     margin: 15px 0px 0px 0px;
 }
 
-#btnDailyRanking, #btnWeeklyRanking, #btnMonthlyRanking {
+#btnDailyRanking, 
+#btnWeeklyRanking, 
+#btnMonthlyRanking {
     width: 80px;
     height: 27px;
     margin: 10px 0px;
@@ -94,13 +90,12 @@
 } 
 
 #showMoreResults {
-    width: 70px;
-    height: 27px;
-    /* padding: 2px; */
-    background-color: var(--color7);
+    width: 30px;
+    padding: 2px;
+    background-color: var(--color1);
     font-family: 'Protest Riot', sans-serif;
     display: none;
-    /* color: var(--color6); */
+    color: var(--color6);
     cursor: pointer;
     margin-left: 310px;
     margin-top: 5px;
@@ -112,13 +107,10 @@
 table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px; 
-    border: 2px solid var(--color7); /* Cor da borda */
-    /* border-radius: 10px; */
 }
 
 td {
-    padding: 12px 20px; /* Espaçamento interno (padding) para os elementos */
+    padding: 12px 20px; 
     text-align: center;
     font-family: 'Protest Riot', sans-serif;
     font-size: 16px;
@@ -134,9 +126,20 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #6dfa09; /* Cor de fundo para linhas pares */
+    background-color: #6dfa09; 
 }
 
+tr:nth-child(odd) {
+    background-color: var(--color6); 
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; 
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; 
+}
 
 tr:nth-child(-n+3) {
     background-color: rgb(55, 250, 21);
@@ -145,4 +148,27 @@ tr:nth-child(-n+3) {
 tr:nth-child(n+5) {
     background-color: var(--color1);
     color: var(--color6);
+}
+
+
+@media screen and (max-width: 768px) {
+    #showRankingDiv {
+        width: 330px;
+    }
+
+    #showMoreResults {
+        margin-left: 295px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    #showRankingDiv {
+        width: 330px;
+    }
+
+    #showMoreResults {
+        margin-left: 290px;
+    }
+ 
 }

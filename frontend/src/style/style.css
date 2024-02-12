@@ -8,12 +8,6 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* font-family: 'Changa One', sans-serif;
-font-family: 'Protest Riot', sans-serif;
-font-family: 'Protest Strike', sans-serif;
-font-family: 'Quicksand', sans-serif;
-font-family: 'Roboto Condensed', sans-serif; */
-
 :root {
     --color1: #383939;
     --color2: #149c68;
@@ -22,7 +16,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     --color5: #fffedb;
     --color6: #ffffff;
     --color7: #00deffc7;
-
+    --color8: #ff0000;
 }
 
 #containerIndex {
@@ -79,6 +73,12 @@ font-family: 'Roboto Condensed', sans-serif; */
     z-index: 999;
 }
 
+#divButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #greeting {
     font-size: 35px;
     color: var(--color1);
@@ -90,14 +90,17 @@ font-family: 'Roboto Condensed', sans-serif; */
     width: 220px;
     height: 30px;
     padding: 1px 5px;
-    background-color: var(--color6);
+    background-color: var(--color1);
     border: 0;
     border-radius: 5px;
+    color: var(--color6);
+    text-align: center;
+    font-size: 18px;
 }
 
 #inputName::placeholder {
     font-size: 18px;
-    color: rgba(118, 118, 118, 0.678);
+    color: rgba(161, 161, 161, 0.678);
     text-align: center;
 }
 
@@ -116,11 +119,11 @@ font-family: 'Roboto Condensed', sans-serif; */
 #inputNameConfig::placeholder {
     text-align: center;
     color: rgba(190, 190, 190, 0.678);
-} 
+}
 
 #labelInputUsername {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     color: var(--color1);
     align-items: center;
     margin-top: -15px;
@@ -133,7 +136,7 @@ font-family: 'Roboto Condensed', sans-serif; */
 #btnStart {
     width: 100px;
     height: 100px;
-    background-color:  var(--color1);
+    background-color: var(--color1);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -145,32 +148,14 @@ font-family: 'Roboto Condensed', sans-serif; */
     transform: scale(1.1);
 }
 
-#btnRanking {
-    width: 50px;
-    height: 30px;
-    border: none;
-    border-style: none;
-    cursor: pointer;
-    color: var(--color1);
-    background-color: rgba(60, 40, 40, 0);
-}
-
-#btnProfile {
-    width: 50px;
-    height: 30px;
-    border: none;
-    border-style: none;
-    cursor: pointer;
-    color: var(--color1 );
-    background-color: rgba(60, 40, 40, 0);
-}
-
+#btnRanking,
+#btnProfile,
 #btnConfig {
-    background-color: transparent;
-    cursor: pointer;
-    border: none;
     width: 50px;
     height: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(60, 40, 40, 0);
 }
 
 #btnAlterUser {
@@ -188,51 +173,14 @@ font-family: 'Roboto Condensed', sans-serif; */
     font-family: 'Protest Riot';
 }
 
-#modalRanking {
-    width: 25%;
-    min-width: 300px;
-    min-height: 330px;
-    background-color: var(--color7);
-    backdrop-filter: blur(30px);
-    padding: 50px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+#btnShareResults {
+    width: 170px;
+    font-size: 18px;
 }
 
-#modalProfile {
-    width: 25%;
-    min-width: 300px;
-    min-height: 330px;
-    background-color: var(--color7);
-    backdrop-filter: blur(30px);
-    padding: 50px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-}
-
-#modalConfig {
-    width: 25%;
-    min-width: 300px;
-    min-height: 330px;
-    background-color: var(--color7);
-    backdrop-filter: blur(30px);
-    padding: 50px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-}
-
+#modalRanking,
+#modalProfile,
+#modalConfig,
 #modalResults {
     width: 25%;
     min-width: 300px;
@@ -243,7 +191,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    /* gap: 50px; */
     align-items: center;
     justify-content: center;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
@@ -262,12 +210,12 @@ font-family: 'Roboto Condensed', sans-serif; */
     text-align: center;
     padding: 20px 10px;
     font-family: Helvetica, sans-serif;
-    color: #ffff;
+    color: var(--color6);
     border: 1px solid #a3a1a145;
-    background-color: rgba(94, 88, 88, 0.5); /* RGBA para definir a transparência */
+    background-color: rgba(94, 88, 88, 0.5);
     border-radius: 10px;
-    margin-top: 30px;
-    margin-right: 20px;
+    margin-top: 25px;
+    margin-bottom: 35px;
 }
 #close {
     position: absolute;
@@ -298,7 +246,7 @@ font-family: 'Roboto Condensed', sans-serif; */
 }
 
 .heart {
-    color: red;
+    color: var(--color8);
     cursor: pointer;
 }
 
@@ -307,37 +255,38 @@ font-family: 'Roboto Condensed', sans-serif; */
 }
 
 .icon {
-    font-size: 24px; 
-    color: #00deffc7;
+    font-size: 24px;
+    color: var(--color7);
 }
 
 .sucess {
-    border: 3px solid #38c958 !important;    
+    border: 3px solid var(--color3) !important;
 }
 
 .sucess:focus {
-    border: 3px solid #38c958 !important;
-    outline: none;    
-}
-
-.error {
-    border: 3px solid red !important;
-}
-
-.error:focus {
-    border: 3px solid red;
+    border: 3px solid var(--color3) !important;
     outline: none;
 }
 
-#divButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+.error {
+    border: 3px solid var(--color8) !important;
 }
 
-#btnShareResults {
-    width: 170px;
+.error:focus {
+    border: 3px solid var(--color8);
+    outline: none;
+}
+
+.mainTitle {
+    text-align: center;
+    font-size: 40px;
+    line-height: 100px;
+}
+
+.iconStart {
+    font-size: 50px;
+    margin-left: 10px;
+    color: var(--color6);
 }
 
 .btnFinal {
@@ -363,7 +312,7 @@ font-family: 'Roboto Condensed', sans-serif; */
     cursor: pointer;
     border-radius: 10px;
     background-color: #383939;
-    color: #ffffff;
+    color: var(--color6);
     font-family: 'Protest Riot', sans-serif;
 }
 
@@ -373,12 +322,119 @@ font-family: 'Roboto Condensed', sans-serif; */
     background-color: var(--color1);
     margin-bottom: 3px;
     border-radius: 20px;
-    /* padding: 5px 20px; */
     text-align: center;
 }
-#modalResults {
-    background-image: url('../../assets/img/gmaeOver.png');
+
+#record {
+    width: 300px;
+    max-width: 360px;
 }
-/* #divModalResults {
-    background-image: url('');
-} */
+
+@media screen and (max-width: 768px) {
+
+    #containerStart {
+        width: 65%;
+        max-width: 65%;
+        height: 440px;
+    }
+
+    #modalRanking,
+    #modalProfile,
+    #modalConfig,
+    #modalResults {
+        width: 40%;
+        max-width: 40%;
+        height: 350px;
+    }
+
+    #btnStart {
+        width: 80px;
+        height: 80px;
+    }
+
+    #btnRanking,
+    #btnProfile,
+    #btnConfig {
+        font-size: 14px;
+    }
+
+    .iconStart {
+        font-size: 30px;
+        margin-left: 5px;
+        color: var(--color6);
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    #containerStart {
+        width: 90%;
+        max-width: 90%;
+        height: 400px;
+    }
+
+    #modalRanking,
+    #modalProfile,
+    #modalConfig,
+    #modalResults {
+        width: 65%;
+        max-width: 65%;
+        min-width: 250px;
+        height: 380px;
+    }
+
+    #contentElements {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+
+    #btnStart {
+        width: 75px;
+        height: 75px;
+    }
+
+    #btnRanking,
+    #btnProfile,
+    #btnConfig {
+        font-size: 12px;
+    }
+
+    #greeting {
+        font-size: 38px;
+    }
+
+    #inputName,
+    #inputNameConfig {
+        height: 25px;
+        font-size: 12px;
+    }
+
+    #btnAlterUser {
+        font-size: 11px;
+    }
+
+    .configModalGlobal {
+        min-width: 250px;
+    }
+
+    .title {
+        font-size: 45px;
+    }
+
+    .mainTitle {
+        font-size: 40px;
+        line-height: 80px;
+    }
+
+    .recordsUser {
+        font-size: 20px;
+    }
+
+    .iconStart {
+        font-size: 25px;
+        margin-left: 5px;
+        color: var(--color6);
+    }
+}

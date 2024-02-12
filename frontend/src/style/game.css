@@ -11,6 +11,7 @@
     --color5: #fffedb;
     --color6: #ffffff;
     --color7: #00deffc7;
+    --color8: #ff0000;
 }
 
 #containerMainQuestions {
@@ -42,7 +43,7 @@
     margin-bottom: 50px;
     margin-top: 50px;
     text-decoration: underline;
-    color: red;
+    color: var(--color8);
 }
 
 #inputAnswers {
@@ -89,7 +90,7 @@
     position: fixed;
     width: 10px;
     height: 10px;
-    background-color: #f00; /* Cor dos confetes */
+    background-color: var(--color8);
     border-radius: 50%;
     z-index: 9999;
     pointer-events: none;
@@ -114,5 +115,17 @@
     }
     50% {
         transform: translateY(-10px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #containerQuestions {
+        width: 90%;
+        max-width: 90%;
+        height: 500px;
+    }
+ 
+    .title {
+        font-size: 40px;
     }
 }
