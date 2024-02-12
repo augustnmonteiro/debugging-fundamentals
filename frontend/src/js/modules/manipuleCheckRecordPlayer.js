@@ -31,6 +31,7 @@ class RecordChecker {
             const data = await response.json();
 
             let divRecordUser = document.querySelector('#recordUser');
+            divRecordUser.style.display = 'block';
             divRecordUser.innerHTML = '';
             console.log(data.dataRecordPlayer[0].max_score);
 
@@ -42,15 +43,16 @@ class RecordChecker {
                 } else if (sharedVariables.points > maxScore) {
                     sharedVariables.UserSetANewRecord = true;
                     const p = document.createElement('p');
-                    const msgNewRecord = `
-                        Congratulations you have set a new score record.
-                        '\n'New Score: ${sharedVariables.points}.
+                    const msgNewRecord = `Congratulations!!
+                        New Record of Score: ${sharedVariables.points}.
+                        Send for your friends and invit for start game.
+                        🥳🥳🥳🥳
                     `;
-                    p.textContent = `${msgNewRecord}`;
-                    this.generateConfetti()
                     document.querySelector("#modalAlertResults").style.display = 'none'
-
+                    p.textContent = `${msgNewRecord}`;
                     divRecordUser.appendChild(p);
+                    
+                    this.generateConfetti()
                     return maxScore;
                 } else {
                     console.log('You did not beat the record.');

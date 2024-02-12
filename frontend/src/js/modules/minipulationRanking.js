@@ -109,8 +109,8 @@ class Ranking {
             const buttons = [btnDailyRanking, btnWeeklyRanking, btnMonthlyRanking];
             buttons.forEach(button => {
                 if (button === selectedButton) {
-                    button.style.backgroundColor = 'black';
-                    button.style.color = '#fff';
+                    button.style.backgroundColor = '#00deffc7';
+                    button.style.color = '#383939';
                 } else {
                     button.style.backgroundColor = '';
                     button.style.color = '';
@@ -120,18 +120,21 @@ class Ranking {
     
         btnDailyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
+            this.limit = 50;
             this.handlePeriodChange('DAILY', this.limit); 
             applyStyle(btnDailyRanking);
         });
     
         btnWeeklyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
+            this.limit = 50;
             this.handlePeriodChange('WEEKLY', this.limit); 
             applyStyle(btnWeeklyRanking);
         });
     
         btnMonthlyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
+            this.limit = 50;
             this.handlePeriodChange('MONTLHY', this.limit); 
             applyStyle(btnMonthlyRanking);
         });

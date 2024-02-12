@@ -100,3 +100,19 @@
     0% { transform: translateY(0); }
     100% { transform: translateY(100vh); }
 }
+
+.animation {
+    font-family: 'Protest Riot', sans-serif;
+    font-size: 50px;
+    color: var(--color1);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

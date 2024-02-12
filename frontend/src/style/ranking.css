@@ -32,7 +32,7 @@
 }
 
 #showRanking {
-    color: #171717;
+    color: var(--color6);
     margin-bottom: 20px;
 }
 
@@ -53,8 +53,9 @@
     width: 400px;
     margin: 30px 0px 0px 0px;
     border-radius: 10px;
-    border-color: black;
-    background-color: var(--color1);
+    /* border-color: black; */
+    border-bottom: var(--color1);
+    background-color: var(--color7);
     height: 450px;
     max-height: 450px;
     overflow-y: auto;
@@ -94,15 +95,17 @@
 
 #showMoreResults {
     width: 70px;
-    padding: 2px;
+    height: 27px;
+    /* padding: 2px; */
     background-color: var(--color7);
     font-family: 'Protest Riot', sans-serif;
     display: none;
-    color: var(--color1);
+    /* color: var(--color6); */
     cursor: pointer;
     margin-left: 310px;
     margin-top: 5px;
-    border: none;
+    border: 1px solid var(--color1);
+    border-radius: 10px;
     font-size: 20px;
 }
 
@@ -110,7 +113,7 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px; 
-    border: 2px solid var(--color1); /* Cor da borda */
+    border: 2px solid var(--color7); /* Cor da borda */
     /* border-radius: 10px; */
 }
 
@@ -140,6 +143,6 @@ tr:nth-child(-n+3) {
     color: #101010;
 }
 tr:nth-child(n+5) {
-    background-color: var(--color7);
-    color: var(--color1);
+    background-color: var(--color1);
+    color: var(--color6);
 }

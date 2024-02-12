@@ -18,11 +18,15 @@ class ManipulationElements {
             const btnRestartGame = document.querySelector("#restartGame");
             const btnShowRanking = document.querySelector("#showRanking");
             const btnHome = document.querySelector("#showIndex");
+            const createP = document.createElement('p');
             
             sharedVariables.divModalResults.style.display = "flex";
             sharedVariables.divContainerQuestions.style.display = "none";
             btnRestartGame.focus();
-            modalResults.innerHTML = `Congratulations ${sharedVariables.nameUser}! You scored ${points} Points`;
+            modalResults.style.display = 'block'
+            modalResults.innerHTML = '';
+            createP.textContent = `Congratulations ${sharedVariables.nameUser}!! You scored ${sharedVariables.points} points, send it to your friend to play and learn together`;
+            modalResults.appendChild(createP);
             RecordChecker.getRecord();
     
             ManipulationDB.sendMatchDataDB();
