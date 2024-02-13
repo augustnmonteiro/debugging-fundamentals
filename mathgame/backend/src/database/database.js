@@ -1,19 +1,21 @@
-require('dotenv').config();
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
-const config = {
-    DATABASE: process.env.DATABASE,
-    HOST: process.env.HOST,
-    USER: process.env.USER,
-    PASSWORD: process.env.PASSWORD
-};
+const dbPath = path.resolve(__dirname, 'math-game.db');
+const connection = new sqlite3.Database(dbPath);
 
-const mysql = require('mysql2');
-
-const connection = mysql.createConnection({
-    host: config.HOST,
-    user:config.USER,
-    password : config.PASSWORD,
-    database : config.DATABASE
+connection.serialize(() => {
+    connection.run(`CREATE TABLE IF NOT EXISTS players (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT,
+        score INTEGER,
+        round INTEGER,
+        level INTEGER,
+        browser TEXT,
+        operational_system TEXT,
+        ip_address TEXT,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`);
 });
 
 module.exports = connection;
