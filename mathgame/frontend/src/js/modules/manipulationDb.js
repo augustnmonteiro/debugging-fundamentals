@@ -11,7 +11,8 @@ class ManipulationDB{
     
             const dados = { username, score, round, level };
     
-            fetch('http://localhost:8180/users/insertUsers', {
+            const apiUrl = 'http://localhost:8180/users/insertUsers';
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
