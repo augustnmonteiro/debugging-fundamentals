@@ -135,7 +135,7 @@ class Ranking {
         btnMonthlyRanking.addEventListener('click', () => {
             this.clearPreviousResults();
             this.limit = 50;
-            this.handlePeriodChange('MONTLHY', this.limit); 
+            this.handlePeriodChange('MONTHLY', this.limit); 
             applyStyle(btnMonthlyRanking);
         });
     

@@ -29,7 +29,7 @@ const insertUserIntoDatabase = (connection, user, res) => {
 
         const values = [username, score, round, level, os, browser, ip_address];
 
-        connection.run(query, values, function(error) {
+        connection.run(query, values, (error) => {
             if (error) {
                 handleDatabaseError(res, error);
                 reject(error);
