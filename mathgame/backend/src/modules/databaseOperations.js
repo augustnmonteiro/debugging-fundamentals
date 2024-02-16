@@ -7,12 +7,12 @@ const getAllUsersFromDatabase = (connection, res) => {
     return new Promise((resolve, reject) => {
         let query = 'SELECT * FROM players';
 
-        connection.query(query, (error, result) => {
+        connection.all(query, (error, rows) => {
             if (error) {
                 handleDatabaseError(res, error);
                 reject(error);
             } else {
-                resolve(result);
+                resolve(rows);
             }
         });
     });
@@ -29,34 +29,35 @@ const insertUserIntoDatabase = (connection, user, res) => {
 
         const values = [username, score, round, level, os, browser, ip_address];
 
-        connection.query(query, values, (error, results) => {
+        connection.run(query, values, function(error) {
             if (error) {
                 handleDatabaseError(res, error);
                 reject(error);
             } else {
-                console.log('Registration entered successfully:', results);
-                resolve();
+                console.log('Registration entered successfully:', this.lastID);
+                resolve(this.lastID);
             }
         });
     });
 };
 
-const  getRanking = (connection, rankType, limit, res) => {
+
+const getRanking = (connection, rankType, limit, res) => {
     return new Promise((resolve, reject) => {
         let timeFrameCondition;
         let dateFormat;
 
         switch (rankType) {
             case "DAILY":
-                timeFrameCondition = "DATE(date) = CURRENT_DATE()";
+                timeFrameCondition = "date(date) = date('now')";
                 dateFormat = "%Y-%m-%d";
                 break;
             case "WEEKLY":
-                timeFrameCondition = `YEARWEEK(date, 1) = YEARWEEK(CURRENT_DATE(), 1)`;
-                dateFormat = "%Y-%u";
+                timeFrameCondition = "strftime('%Y-%W', date) = strftime('%Y-%W', 'now')";
+                dateFormat = "%Y-%W";
                 break;
-            case "MONTLHY":
-                timeFrameCondition = `DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')`;
+            case "MONTHLY":
+                timeFrameCondition = "strftime('%Y-%m', date) = strftime('%Y-%m', 'now')";
                 dateFormat = "%Y-%m";
                 break;
             default:
@@ -70,39 +71,35 @@ const  getRanking = (connection, rankType, limit, res) => {
             RANK() OVER (ORDER BY MAX(score) DESC) AS position
             FROM players
             WHERE ${timeFrameCondition}
-            GROUP BY username, level, round, DATE_FORMAT(date, ?)
+            GROUP BY username, level, round, strftime('${dateFormat}', date)
             ORDER BY score DESC LIMIT ?
         `;
 
-        connection.query(queryRank, [dateFormat, limit], (error, results) => {
+        connection.all(queryRank, [limit], (error, rows) => {
             if (error) {
-                handleDatabaseError(res, error)
+                handleDatabaseError(res, error);
                 reject(error);
             } else {
-                if (results.length > 0) {
-                    resolve(results);
-                } else {
-                    resolve([]);
-                }
+                resolve(rows);
             }
         });
     });
-}
+};
 
 const getRecordOfPlayer = (connection, username, period, res) => {
     return new Promise((resolve, reject) => {
-        if(username && period) {
+        if (username && period) {
             let timeFrameCondition;
-            
+
             switch (period) {
                 case "DAILY":
-                    timeFrameCondition = "DATE(date) = CURRENT_DATE()";
+                    timeFrameCondition = "date(date) = date('now')";
                     break;
                 case "WEEKLY":
-                    timeFrameCondition = "YEARWEEK(date, 1) = YEARWEEK(CURRENT_DATE(), 1)";
+                    timeFrameCondition = "strftime('%Y-%W', date) = strftime('%Y-%W', 'now')";
                     break;
                 case "MONTHLY":
-                    timeFrameCondition = "DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')";
+                    timeFrameCondition = "strftime('%Y-%m', date) = strftime('%Y-%m', 'now')";
                     break;
                 default:
                     res.status(400).json({ msg: "Invalid period." });
@@ -118,24 +115,20 @@ const getRecordOfPlayer = (connection, username, period, res) => {
                 SUM(round) AS total_rounds_played
                 FROM players WHERE username = ? AND ${timeFrameCondition};
             `;
-              
-            connection.query(querySqlRecord, [username], (error, results) => {
-                if(error) {
-                    handleDatabaseError(res, error)
-                    reject(error)
+
+            connection.all(querySqlRecord, [username], (error, rows) => {
+                if (error) {
+                    handleDatabaseError(res, error);
+                    reject(error);
                 } else {
-                    if(results.length > 0) {
-                        resolve(results)
-                    } else {
-                        resolve([])
-                    }
+                    resolve(rows);
                 }
-            })
+            });
         } else {
-            reject("Username or period is invalid.")
+            reject("Username or period is invalid.");
         }
-    })
-}
+    });
+};
 
 module.exports = {
     getAllUsersFromDatabase,
