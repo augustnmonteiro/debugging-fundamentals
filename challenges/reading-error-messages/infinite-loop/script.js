@@ -1,22 +1,28 @@
-let quantity = 5;
-let secretNumber = Math.floor(Math.random() * quantity); 
-let attempts = 0;
-
-while (true) {
-    const guess = parseInt(prompt(`Guess the number (between 1 and ${quantity}):`));
-
-    if (isNaN(guess)) {
-        alert("Please enter a valid number.");
-        break;
+function calculateAverage() {
+    const notesStr = document.getElementById("notes").value;
+    
+    if (!notesStr) {
+      alert("Warning: Enter the notes!");
+      return;
     }
-
-    attempts++;
-
-    if (guess === secretNumber) {
-        alert(`Congratulations! You guessed it in ${attempts} attempts.`);
-        attempts = 0; 
-        secretNumber = Math.floor(Math.random() * 10) + 1; 
-    } else {
-        alert("Try again. Your guess is incorrect.");
+    
+    const notes = notesStr.split(",").map(Number);
+    
+    if (notes.some(isNaN)) {
+      alert("Error: Notes should be numbers!");
+      return;
     }
+    
+    let sum = 0;
+    for (const note of notes) {
+        while(true) {
+            sum += note;
+        }
+    }
+    
+    const average = sum / notes.length;
+    
+    document.getElementById("result").innerHTML = `Average: ${average}`;
 }
+
+document.querySelector('#calculateAverage').addEventListener('click', calculateAverage)
