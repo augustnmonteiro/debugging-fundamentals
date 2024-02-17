@@ -15,7 +15,7 @@ Follow these steps to run the challenges on your local machine:
 1. **Open the terminal and clone the repository:**
 
 ```
-git clone https://github.com/seu-usuario/desafios-js-puro.git
+git clone https://github.com/augustnmonteiro/debugging-fundamentals.git
 ```
 
 2. **Navigate to the challenges directory in the repository:**
