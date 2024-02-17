@@ -2,15 +2,20 @@ function CalculateMultiplicationTable(number) {
     let table = '<table border="1">';
 
     for (let i = 1; i <= number; i++) {
-        table += '<tr>';
-        for (let j = 1; j <= 10; j++) {
-            table += `<td ${i} x ${j} = ${i * j}</td>`;
-        }
-        table += '</tr>';
+        table += createTableRow(i);
     }
 
     table += '</table>';
     return table;
+}
+
+function createTableRow(rowNumber) {
+    let row = '<tr>';
+    for (let j = 1; j <= 10; j++) {
+        row += `<td ${rowNumber} x ${j} = ${rowNumber * j}</td>`;
+    }
+    row += '</tr>';
+    return row;
 }
 
 function viewTable() {
