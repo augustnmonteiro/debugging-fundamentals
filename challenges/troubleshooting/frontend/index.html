@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Changa+One&family=Protest+Riot&family=Protest+Strike&family=Quicksand:wght@300&family=Roboto+Condensed:wght@300;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./src/style/style.css">
+    <link rel="stylesheet" href="./src/style/game.css">
+    <link rel="stylesheet" href="./src/style//ranking.css">
+
+    <title>Mathematical Game</title>
+</head>
+
+<body id="confettiContainer">
+    <div id="containerStartGeneral">
+        <div id="containerIndex">
+            <div id="contentElements">
+                <button id="btnRanking"><i class="fa-solid fa-star icon"></i></button>
+                <button id="btnProfile"><i class="fa-solid fa-user icon"></i></button>
+                <button id="btnConfig"><i class="fa fa-gear fa-spin icon"></i></button>
+            </div>
+
+            <h1 style="font-size: 40px; color: #383939;">Mathematical Game</h1>
+            <p id="infor" style="color: #383939; text-align: center; font-size: 18px; margin-bottom: 20px;">Ready to
+                prove that your mind can solve even the most challenging math problems? Test your limits now!</p>
+
+            <div id="containerStart">
+                <h1 class="title mainTitle">What is the value
+                    of</br> <span style="text-decoration: underline; color: #ff0000;">?
+                        X ? = ?</span></h1>
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: -20px;">
+                    <h2 id="greeting" class="title"></h2>
+
+                    <div id="labelInputUsername">
+                        <label id="labelUsername" style="margin-bottom: 5px;">Enter your Username:</label>
+                        <input type="text" id="inputName">
+                    </div>
+
+                    <span id="inforStartGame" style="margin-top: 10px;">Click the button below to start</span>
+                    <button id="btnStart">
+                        <i class="fa-solid fa-play fa-beat iconStart"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="divModalRanking" class="configModalGlobal">
+            <div id="modalRanking" style="display: flex; flex-direction: column;">
+                <h3 id="titleLeaderBoard">Leaderboard</h3>
+
+                <div id="btnsPeriodRanking">
+                    <div style="height: 27px;">
+                        <button id="btnDailyRanking">DAILY</button>
+                        <button id="btnWeeklyRanking">WEEKLY</button>
+                        <button id="btnMonthlyRanking">MONTLHY</button>
+                    </div>
+                    <button id="close">X</button>
+                </div>
+
+                <div id="showRankingDiv"></div>
+                <button id="showMoreResults">+</button>
+            </div>
+        </div>
+
+        <div id="divModalProfile" class="configModalGlobal">
+            <div id="modalProfile">
+                <h1 id="headerProfile" class="title" style="margin-top: -70px; margin-bottom: 35px;">Profile </h1>
+                <h1 id="usernameProfile" style="color: #fff; font-size: 40px; margin-bottom: 30px;"></h1>
+
+                <button id="close">X</button>
+                <div id="btnFilterProfile">
+                    <button id="dailyBtnSelectRecordPeriod" class="btnFilter">DAILY</button>
+                    <button id="weeklyBtnSelectRecordPeriod" class="btnFilter">WEEKLY</button>
+                    <button id="monthlyBtnSelectRecordPeriod" class="btnFilter">MONTLHY</button>
+                </div>
+                <div id="record"></div>
+            </div>
+        </div>
+
+        <div id="divModalConfig" class="configModalGlobal">
+            <div id="modalConfig">
+                <button id="close">X</button>
+                <h1 id="headerConfig" class="title" style="margin-bottom: 45px; margin-top: -100px;">Config</h1>
+                <h1 id="usernameConfig" style="color: #fff; font-size: 40px; margin-bottom: 40px;"></h1>
+                <input type="text" id="inputNameConfig" placeholder="Enter a new username...">
+                <button id="btnAlterUser">Change Username</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- div tela do jogo -->
+    <div id="containerMainQuestions">
+        <div id="containerQuestions">
+            <div id="containersElementsQuestions">
+                <p id="levelQuestions">Level: 0</p>
+                <p id="pointsQuestions">Points: 0</p>
+                <div>
+                    <i id="heart1" class="fas fa-heart fa-beat heart"></i>
+                    <i id="heart2" class="fas fa-heart fa-beat heart"></i>
+                    <i id="heart3" class="fas fa-heart fa-beat heart"></i>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <h1 id="headerQuestions" class="title">What is the value of</h1>
+                <p id="displayQuestions"></p>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <input type="number" id="inputAnswers" placeholder="Enter the answer...">
+                <button id="btnAnswers">Respond</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- div tela final do jogo -->
+    <div id="divModalResults" class="configModalGlobal">
+        <div id="modalResults">
+            <div id="resultsUser">
+                <div class="animation">GAME OVER</div>
+                <div id="modalAlertResults" style="display: none;"></div>
+                <div id="recordUser" style="display: none;"></div>
+            </div>
+            <div id="divButtons">
+                <button id="btnShareResults" class="btnFinal">Share</button>
+                <div style="display: flex; margin-top: 5px;">
+                    <button id="restartGame" class="btnFinal">Play Again</button>
+                    <button id="showIndex" class="btnFinal">Home</button>
+                    <button id="showRanking" class="btnFinal">Ranking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="resultsRankingGameOver" style="display: none;">
+        <button id="close">X</button>
+        <select id="selectPeriodRanking">
+            <option value="DAILY">DAILY</option>
+            <option value="WEEKLY">WEEKLY</option>
+            <option value="MONTLHY">MONTLY</option>
+        </select>
+        <div id="resultsUsersModal"></div>
+        <button id="showMoreResults">More</button>
+    </div>
+
+    <script type="module" src="./src/js/main.js"></script>
+</body>
+
+</html>
