@@ -5,7 +5,6 @@ const dbPath = path.resolve(__dirname, 'math-game.db');
 const connection = new sqlite3.Database(dbPath);
 
 connection.serialize(() => {
-    //
     connection.runn(`CREATE TABLE IF NOT EXISTS players (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT,
@@ -17,7 +16,6 @@ connection.serialize(() => {
         ip_address TEXT,
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
-    
 });
 
 module.exports = connection;
