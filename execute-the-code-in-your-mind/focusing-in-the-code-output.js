@@ -1,12 +1,10 @@
 function g(II) {
-    let t = 0;
+    let l = [];
     for (let i = 0; i < II.length; i++) {
-      let t = [];
-      if (II[i].z >= II[i].x && II[i].b) {
-        t = t.concat([II[i]]);
-      }
+      let t = II[i];
+      if (t.z >= t.x && t.b) { l = l.concat(t); }
     }
-    return t;
+    return l;
   }
   
   let xyz = [
