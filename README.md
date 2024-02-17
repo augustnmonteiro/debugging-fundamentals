@@ -233,5 +233,5 @@ This is the Project used without bugs and this is the link for you to test:
 
 #### Always remember the importance of the debugging process in software development and the patience and persistence required to identify and fix bugs. Keep practicing and never stop learning!
 
-#### If you have any questions or feedback, feel free to [contact us](Contact_URL). Thank you for using this repository and good luck on your debugging journey!
+#### If you have any questions or feedback, feel free to contact us. Thank you for using this repository and good luck on your debugging journey!
 
