@@ -16,8 +16,9 @@ function getItemsInNeed() {
             ItemsInNeed.push(item);
         }
 
-        return ItemsInNeed;
     }
+
+    return ItemsInNeed;
 }
 
 console.log(getItemsInNeed())
